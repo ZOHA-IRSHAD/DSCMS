@@ -1,0 +1,28 @@
+/* styles */
+#UserReg {
+  background-image: url('/assets/pexels-photo.jpeg');
+   width: 100%;
+  height: 662px;     
+   background-attachment: fixed; 
+}
+
+.submit-button
+{
+    text-align: center;
+}
+
+h5{
+    text-align: right;
+    color: #ff4d4d;
+}
+
+.fa
+{
+    color: #fff;
+}
+
+test
+{
+   float:left;
+   clear:both;
+}

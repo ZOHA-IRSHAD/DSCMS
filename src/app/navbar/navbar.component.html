@@ -1,0 +1,156 @@
+<div class="container-fluid header-body">
+  <div class="row">
+      <div class="col-md-4 col-sm-1 col-xs-4">
+        <div class="head-section">
+          <a href="/#/navBar/home"><img src="assets/FinalLogo.png" class="img-responsive" height=250px width=250px></a>
+        </div><!--end of class of head-section-->
+      </div><!--end of column of head section (image)-->
+
+      <div class="col-md-8 col-sm-11 col-xs-8">
+        <div class="head-section-bar">
+            <nav class="navbar navbar-transparent navbar-static-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                      <button type="btn btn-responsive-nav" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span> 
+                      </button>
+                    </div><!--end of navbar-header-->
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                      <ul class="nav navbar-nav navbar-right" id="nav">
+                          <li><a routerLink="/navBar/home" routerLinkActive="router-link-active"><i class="fa fa-home fa-1x" aria-hidden="true"></i>
+                            <span class="colortotext">Home</span></a>
+                          </li>                          
+                          <li routerLinkActive="router-link-active" class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-file-text fa-1x" aria-hidden="true"></i>
+                                <span class="colortotext">My Orders</span> 
+                                <span class="caret" ></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                 <!-- <li><a routerLink="/navBar/wallet" routerLinkActive="router-link-active"><span class="colortotext">Passbook</span></a></li>  -->
+                                 <!-- <li class="divider"></li>  -->
+                                <li><a routerLink="/navBar/transactionHistory" routerLinkActive="router-link-active"><span class="colortotext">Order History</span></a></li> 
+                            </ul>
+                          </li>
+                          <li>
+                            <a title="Find your items here....!!!" routerLink="/navBar/cart" routerLinkActive="router-link-active">
+                              <i class="fa fa-shopping-cart fa-1x"></i>
+                              <span class="colortotext">Cart</span><span> ({{staticQuantity}}) </span>
+                            </a>
+                          </li>
+                          <li>
+                            <a routerLink="/navBar/help" routerLinkActive="router-link-active">
+                              <i class="fa fa-question-circle fa-1x"></i>
+                              <span class="colortotext">Help</span>
+                            </a>
+                          </li>                          
+                          <li routerLinkActive="router-link-active" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                  <i class="fa fa-user fa-1x" aria-hidden="true"></i> 
+                                  <span class="colortotext">{{username?.username}}</span> <span class="caret" ></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                      <li routerLinkActive="router-link-active"><a [routerLink] ="['/passwordchange']" routerLinkActive="router-link-active"><i class="fa fa-key fa-1x" aria-hidden="true" ></i>
+                                        <span class="colortotext">Change Password</span></a>
+                                      </li>
+                                      <li routerLinkActive="router-link-active"><a [routerLink]="['/']" (click)="logOut();"><i class="fa fa-sign-out fa-1x" aria-hidden="true" ></i>
+                                        <span class="colortotext">SignOut</span></a>
+                                      </li>
+                                </ul>
+                          </li>
+                      </ul>
+                    </div><!--end of navbar-collapse-->
+                </div><!--end of conatiner-fluid-->
+            </nav><!--end of nav-body-->
+        </div><!--end of class of head-section-bar-->
+    </div><!--end of column of head section (bar)-->
+  </div><!--end of row of head section-->
+  <hr>
+</div><!--end of header-body-->  
+
+<router-outlet></router-outlet>
+
+<!--footer -->
+<div class="container-fluid">
+<footer>
+  <section class="footer footer_w3layouts_section_1its">
+    <div class="container">
+      <div class="row footer-top">
+        <div class="col-sm-6 footer-grid_section_1its_w3">
+          <div class="footer-title">
+            <h3>About Us</h3>
+          </div>
+          <div class="footer-text">
+            <p class="p-color">Smart Cafeteria Management system (SCMS) allows employees of Tech Mahindra to order 
+              food through the application which helps refrain from long queues to get food token and allow 
+              users to manage and plan their time efficiently relishing the available cuisines.</p>
+            <ul class="social_section_1info">
+              <li>
+                <a href="https://www.facebook.com/TechMahindra" target="_blank">
+                  <i class="fa fa-facebook-f"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/Tech_Mahindra" target="_blank">
+                  <i class="fa fa-twitter"> </i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.techmahindra.com/General/rss.aspx" target="_blank">
+                  <i class="fa fa-rss"></i>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/company/tech-mahindra" target="_blank">
+                  <i class="fa fa-linkedin"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>    
+        <div class="col-sm-2 footer-grid_section_1its_w3 ">
+          <div class="footer-title">
+            <h3>Useful Links</h3>
+          </div>
+          <ul class="links">
+            <li>
+              <a href="/#/navBar/home">Home</a>
+            </li>
+            <li>
+              <a href="mailto:connect@techmahindra.com" target="_blank" >Support</a>
+            </li>
+            <li>
+              <a href="/#/navBar/help">FAQs</a>
+            </li>          
+          </ul>
+        </div>
+        <div class="col-sm-4 footer-grid_section_1its_w3">
+          <div class="footer-title">
+            <h3> </h3>
+          </div>
+          <div class="footer-text">
+            <a href="https://play.google.com/store/apps/details?id=com.techmahindra.measy " target="_blank">
+              <img src="/assets/google-play-badge.png" width="250" height="80" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <div class="row">
+          <div class="col-sm-6 pull-left">
+            <img src="assets/FinalLogo.png" class="img-responsive" height=80px width=120px>
+          </div>
+          <div class="col-sm-6 col-md-push-2 pull-right copyright-text">
+            <p> &copy; 2018 <a href="https://www.techmahindra.com/pages/default.aspx" target="_blank">Tech Mahindra </a>. All Rights Reserved </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</footer>
+</div>
+<!-- //footer -->
+
+

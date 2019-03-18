@@ -1,0 +1,13 @@
+<div  id = "connectiontimedOut" *ngIf="errorCode==0">
+</div>
+<div id = "notFound" *ngIf="errorCode==404">
+</div>
+<div id = "ServerError" *ngIf="errorCode==500">
+</div>
+<div id = "wrong" *ngIf="errorCode==-1">      
+</div>
+<div id = "routing">
+  <a routerLink="/">Back to home page</a>
+</div>
+
+      

@@ -1,0 +1,65 @@
+/* styles */
+.row-pills
+{
+    height:380px;
+}
+
+.nav-pills>li>a:focus{
+	background-color: #ff4d4d;
+}
+
+
+.pillscls .active a,
+.pillscls .active a:hover
+{
+    background-color: #ff4d4d;
+}
+
+td > a:link {
+    text-decoration: underline;
+    color : black;
+}
+
+ul > li > a:link {
+    color :black;
+}
+
+th
+{
+    text-align: center;
+    background-color : #ff4d4d;
+    font-weight: normal;
+    
+}
+
+tr   
+{
+    text-align: center;
+    color: black;
+    
+} 
+     
+td
+{
+    text-align: center;
+    color: black;
+    font-weight: normal;
+    /* background: gainsboro; */
+}
+h5
+{
+    font-weight: bold;
+    text-align: left;
+}
+h4
+{
+    font-weight: bold;
+    
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+   background-color: gainsboro;
+}
+
+li > a{
+    text-decoration: none;
+}

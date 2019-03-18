@@ -1,0 +1,169 @@
+/* global styles to this file, and also import other style files */
+html{
+     overflow-y: auto;
+}
+body{
+     background: #F5F5F5; 
+     /* background-image: url('/assets/Veg.jpg'); */
+    /* background:blue; */
+     margin: 0;
+    height: 100%;
+    /* width:100%; */
+   
+}
+
+h3
+{
+   color: black;
+   font-size: 30px;
+   font-family:'Quicksand';
+}
+
+h5{
+     text-align: auto;
+     color: #ff4d4d;
+     font-family: 'Quicksand';
+     font-size: 20px;
+     font-weight: bold;
+
+}
+
+li
+{
+    font-size: 18px;
+    font-family: 'Quicksand';
+    color: black;
+}
+
+.panel-body
+{
+    font-family: 'Quicksand';
+    color: #ff4d4d;
+    font-weight: bold;
+    font-size: 15px;
+}
+footer {
+   
+    width:100%;
+    color:black;
+    text-align:center; 
+     position:relative; 
+    bottom: 0;
+    margin-bottom: 10px;
+    font-size:10px;
+}
+
+label
+{
+    font-family: 'Quicksand';
+    color:#ff4d4d;
+    font-weight: bold;
+    font-size:15px;
+
+}
+
+ 
+
+li
+{
+    font-size: 18px;
+    font-family: 'Quicksand';
+    color: black;
+}
+
+.panel-body
+{
+    font-family: 'Quicksand';
+    color: #ff4d4d;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+
+td
+{
+    font-family: 'Quicksand';
+    color:#ff4d4d;
+    font-weight: bold;
+    font-size:15px;
+}
+
+
+tr
+{
+    font-size:18px;
+}
+a 
+{
+    color :#ff4d4d;
+} 
+
+
+ol > li > a {color:#ff4d4d;}
+
+ol > li > a:hover {color:#ff4d4d;}
+
+.colortotext
+{
+    color:  black;     
+}
+
+.colortotext:hover
+{
+    color:#ff4d4d;  
+}
+
+.glyphicon
+{
+    color: #ff4d4d;
+}
+
+.fa
+{
+    color: #ff4d4d;
+}
+
+
+p
+{
+   font-family: 'Quicksand';
+   font-weight: solid;
+   font-size: 18px;
+} 
+
+/* styles for provide hover effect to images */
+.hovereffect {
+  width: 100%;
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  cursor: default;
+  padding-right: 15px;
+  padding-left: 15px; 
+}
+
+
+.hovereffect img {
+  display: block;
+  position: relative;
+  -webkit-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
+}
+
+.hovereffect:hover img {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feColorMatrix type="matrix" color-interpolation-filters="sRGB" values="0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0.2126 0.7152 0.0722 0 0 0 0 0 1 0" /><feGaussianBlur stdDeviation="3" /></filter></svg>#filter');
+  filter: grayscale(0) blur(0px);
+  -webkit-filter: grayscale(0) blur(0px);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+ 
+  @media print
+  {
+       body, html {
+          width: 100%;
+      }
+  } 

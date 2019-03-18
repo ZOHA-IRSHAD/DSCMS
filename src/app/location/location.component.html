@@ -1,0 +1,71 @@
+<simple-notifications [options]="options">
+</simple-notifications>
+
+<br>
+<div class="row">
+<div>
+        <b style="font-size:25px;margin-top:0px;">Location Management</b>
+    </div>
+<h5 style="float:right;padding-right:5px;color:red;">* Required field</h5>
+<br>
+
+<form [formGroup]="LocForm">
+
+
+    <div class="form-group">
+        <label class="control-label col-xs-3"  style="width:180px;color:black">Location Name: <b style="color:red;">*</b></label>
+        <div class="col-xs-9">
+            <input type="text" class="form-control" id="LocationName" style="margin-bottom:10px;" formControlName="location_name" placeholder="Location Name">
+            <span class="help-block" *ngIf="!LocForm.get('location_name').valid && LocForm.get('location_name').touched">Please enter the Valid Location Name</span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-3" style="width:180px;color:black">Location Address: <b style="color:red;">*</b></label>
+        <div class="col-xs-9">
+            <textarea rows="3" class="form-control" id="campus" placeholder="Campus Address" style="margin-bottom:10px;" formControlName="campus"></textarea>
+
+            <span class="help-block" *ngIf="!LocForm.get('campus').valid && LocForm.get('campus').touched">Please enter the Valid Location Name</span>
+
+        </div>
+    </div>
+    <div class="form-group"><br>
+          <label class="control-label col-xs-3" style="width:180px;color:black">Upload Location Image:<b style="color:red;">*</b></label>
+        <div class="col-xs-9">
+          <input type="file" #fileInput placeholder="Upload file..." (change)="selectFile($event)" id="image" >
+        </div>
+    </div>
+    <div style="margin-bottom:20px;" class="form-group">
+        <div class="col-xs-offset-3 col-xs-9">
+            <!-- <button type="submit"  class="btn btn-primary" [disabled]="!LocForm.valid" >Submit</button> -->
+            <button type="submit" style="background-color:#1DA1F2" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"
+                [disabled]="!LocForm.valid">Submit</button>
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <h4 class="modal-title">Confirmation Window</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Please confirm if the Location Form is Filled correctly.If not please press <b>Cancel Button</b>else <b>Confirm button</b></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" style="background-color:#1DA1F2" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-default" (click)="onSubmit();" style="background-color:#1DA1F2;" data-dismiss="modal">Confirm</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <button type="reset" class="btn btn-info btn-lg" value="Reset" style="background-color:#1DA1F2"  (click)="ResetForm(LocForm);">Reset</button>
+        </div>
+    </div>
+
+
+</form></div>
+  
+

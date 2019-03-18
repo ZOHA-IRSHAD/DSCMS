@@ -1,0 +1,68 @@
+<simple-notifications [options]="options"></simple-notifications>
+<ng2-toasty [position]="'bottom-center'"></ng2-toasty>
+<div class="container" *ngIf=showCart style="min-height: 520px;">
+   <h3>Vendor : {{menuItem[0].vendorName}}</h3> 
+    <div class="table-responsive">  
+      <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Food Items</th>
+                      <th>Quantity</th>
+                      <th>Price (<i class="fa fa-inr"  aria-hidden="true" style="color:black"></i>)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of menuItem; let i=index ">
+                      <td>
+                        {{item.foodItems}}
+                        <div *ngIf = checkStockLevel(i) style =" color : #ff4d4d;">
+                          <div *ngIf = "stock[i]==1">
+                              (Only {{stock[i]}} plate left)
+                          </div>
+                          <div *ngIf = "stock[i]>1">
+                            (Only {{stock[i]}} plates left)
+                          </div>
+                        </div> 
+                      </td>
+                      <td>  
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                         <button class="dec btn" (click)="substract(i)"><i class="fa fa-minus"></i></button><input type="text" class="qty"  [(ngModel)]="quantityAddSub[i]" readonly/><button class="inc btn" (click)="add(i)"><i class="fa fa-plus"></i></button>
+                        </div>
+                      </td>
+                      <td>  
+                        {{item.ratePerPlate}}
+                      </td>
+                      <td class="remove">
+                        <a (click)="removeFromCart(item)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                        </a>   
+                      </td>  
+                    </tr>
+                        
+                  </tbody>
+      </table><!--End of table-->
+    </div><!--end of table-responsive-->
+
+    <div class="row total">
+              <h3 class="text-success">Total : <i class="fa fa-inr text-success"  aria-hidden="true"></i>{{sum}}</h3> <br><br><br>
+    </div><!--end of total-->
+
+    <div class="btn-grup">
+      <div class="col-md-4 col-sm-4 col-xs-4 col-md-offset-4 col-sm-offset-4 col-xs-4">
+         <a [routerLink] ="['/navBar/timeService']" > 
+          <button type="button" class="btn btn-danger">Continue Order</button>
+         </a>&nbsp;&nbsp;&nbsp;&nbsp;       
+         <button type="button" class="btn btn-danger" (click)="openCheckout();">&nbsp;Place Order</button>         
+      </div><!--end of column-->
+    </div><!--end of btn-grp-->    
+</div><!--end of container-->
+  <br><br><br>
+   <div class="container-fluid" *ngIf=!showCart>
+    <div class="row">
+       <div class="col-md-6 col-md-offset-3 cartEmpty">
+         <img class="img-responsive" src="assets/Empty_cart.gif">
+       </div> 
+    </div>
+  </div>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>   
+

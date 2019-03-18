@@ -1,0 +1,223 @@
+<simple-notifications [options]="options"></simple-notifications>
+<!-- <div class="col-sm-9"> -->
+
+<div>
+    <b style="font-size:25px;margin-top:0px;">User Management</b>
+</div>
+<br>
+<div class="row" style="margin-bottom:20px;">
+
+
+    <a title="Reset Password" data-toggle="modal" href="#abc"> <b>Reset Password</b></a>
+    <div class="modal fade" id="abc" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Alert</h4>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="ResetForm">
+                        Please enter the user ID to reset the password<br><br>
+                        <div class="input-group">
+
+                            <input formControlName="user_id" type="text" class="form-control" minlength="10" maxlength="10" placeholder="LAN ID" autofocus="autofocus">
+                            <span class="help-block" *ngIf="!ResetForm.get('user_id').valid && ResetForm.get('user_id').touched">Please enter a Valid ID</span>
+                        </div>
+                        <br><br>
+
+                    </form>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="this.ResetForm.reset()"
+                            data-dismiss="modal">Close</button>
+
+                        <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" [disabled]="!ResetForm.valid"
+                            (click)="ResetPwd(ResetForm)" data-dismiss="modal">Confirm</button>
+                    </div>
+                    <!-- end of modal-footer-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab"  href="#Live"  style="font-size:15px;">Active Users</a></li>
+        <li><a data-toggle="tab"  href="#expired" style="font-size:15px;">InActive Users</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="Live" class="tab-pane fade in active">
+            <div style="margin-bottom:10px;">
+                <div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+                    <input class="form-control" placeholder="Search by User Name" name="srch-term2" id="srch-term2" type="text" [(ngModel)]="searchLiveUserText">
+                </div>
+                <table style="margin-top:50px;" class="table table-bordered">
+                    <thead style="background-color:#1DA1F2">
+                        <tr>
+                            <th>Action</th>
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email ID</th>
+                            <th>Phone Number</th>
+                            <th>Date of Registration</th>
+                            <th>Address</th>
+                            <th>User type</th>
+                            <!-- <th>Status</th> -->
+
+                        </tr>
+                    </thead>
+                    <!-- <tbody *ngIf ='arrUserLive===0'><tr><p>No Data Available</p></tr></tbody> -->
+                    <tbody *ngFor='let data of arrUserLive | UserName:searchLiveUserText |paginate: { itemsPerPage: 10, currentPage: p,id: "p" }'>
+                        <!-- ' -->
+                        <tr>
+
+
+
+                            <td style="text-align:center">
+                                <div>
+                                    <a title="Delete User" data-toggle="modal" href="#{{data.user_id}}"> <i class="fa fa-trash fa-2x" aria-hidden="true" style="color:#1DA1F2"></i></a>
+                                    <div class="modal fade" attr.id="{{data.user_id}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+
+                                                    <h4 class="modal-title">Alert</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you would like to delete the User: "<b>{{data.firstname}} {{data.lastname}} </b>"
+                                                        ?
+                                                    </p>
+
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" data-dismiss="modal">Close</button>
+                                                        <!-- <button type="button"  style="background-color:#FF4D4D" data-dismiss="modal">Close</button> -->
+                                                        <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="Delete(data.user_id)"
+                                                            data-dismiss="modal">Confirm</button>
+                                                    </div>
+                                                    <!-- end of modal-footer-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <button title="Delete User" style="margin-right:10px;background-color:#1DA1F2;" id="RefreshButton" type="button" class="btn btn-default btn-sm pull-right" onclick="">
+            <i class="fa fa-trash fa-1x" aria-hidden="true" style="color:white"></i></button> -->
+
+
+                                <!-- <button title="Reset Password"style="margin-right:10px;background-color:#1DA1F2;" id="RefreshButton" type="button" class="btn btn-default btn-sm pull-right"
+        onclick="">
+      
+             <i class="fa fa-lock fa-1x" aria-hidden="true" style="color:white"></i> </button> -->
+
+
+                            </td>
+
+                            <td>{{data.user_id}}</td>
+                            <td>{{data.firstname}}</td>
+                            <td>{{data.lastname}}</td>
+                            <td>{{data.email_id}}</td>
+                            <td>{{data.contact_number}}</td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.address}}</td>
+                            <td>{{data.user_type}}</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="p = $event" id="p" autoHide="true" directionLinks="true">
+                </pagination-controls>
+            </div>
+        </div>
+
+        <div id="expired" class="tab-pane fade">
+
+            <div style="margin-bottom:10px;">
+                <div style="margin-bottom:20px;margin-top:20px;" class="col-md-6 searchitem">
+                    <input class="form-control" placeholder="Search by User Name" name="srch-term1" id="srch-term1" type="text" [(ngModel)]="searchExpUserText">
+                </div>
+
+                <table style="margin-top:50px;" class="table table-bordered">
+                    <thead style="background-color:#1DA1F2">
+                        <tr>
+                            <th>Action</th>
+                            <th>User Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email ID</th>
+                            <th>Phone Number</th>
+                            <th>Date of Registration</th>
+                            <th>Address</th>
+                            <th>User type</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngIf='arrcomplete===0'>
+                        <tr>
+                            <p>No Data Available</p>
+                        </tr>
+                    </tbody>
+                    <tbody *ngFor='let data of arrUserComplete | UserName:searchExpUserText |paginate: { itemsPerPage: 10, currentPage: p,id: "p" }'>
+
+                        <tr>
+
+                            <!-- <td><button title="Restore User" style="margin-right:10px;background-color:#1DA1F2;" id="RefreshButton" type="button" class="btn btn-default btn-sm pull-right"
+        onclick="">
+            <i class="fa fa-undo fa-1x" aria-hidden="true" style="color:white"></i></button>
+</td> -->
+                            <td>
+                                <a title="Restore User" data-toggle="modal" href="#{{data.user_id}}"><i class="fa fa-undo fa-1x" aria-hidden="true" style="color:#1DA1F2"></i></a>
+                                <div class="modal fade" attr.id="{{data.user_id}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">Alert</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you would like to Restore the user: "<b>{{data.firstname}} {{data.lastname}} </b>"
+                                                    ?
+                                                </p>
+
+                                                <br>
+                                                <br>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" data-dismiss="modal">Close</button>
+                                                    <!-- <button type="button"  style="background-color:#FF4D4D" data-dismiss="modal">Close</button> -->
+                                                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="Restore(data.user_id)"
+                                                        data-dismiss="modal">Confirm</button>
+                                                </div>
+                                                <!-- end of modal-footer-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{data.user_id}}</td>
+                            <td>{{data.firstname}}</td>
+                            <td>{{data.lastname}}</td>
+                            <td>{{data.email_id}}</td>
+                            <td>{{data.contact_number}}</td>
+                            <td>{{data.date}}</td>
+                            <td>{{data.address}}</td>
+                            <td>{{data.user_type}}</td>
+                            <!-- <td>{{data.Status}}</td> -->
+
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <pagination-controls (pageChange)="q = $event" id="q" autoHide="true" directionLinks="true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

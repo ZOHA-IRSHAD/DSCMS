@@ -1,0 +1,29 @@
+
+    
+
+
+h1,h2,h3,h4,h5,h6,li,p,b,td,label{
+    
+    font-family: Quicksand;
+    color:Black;
+
+
+}
+th{
+    font-family: quicksand;
+    color:white;
+}
+td{
+    font-size:11px;
+    text-align:left;
+}
+th{
+    text-align: center ;
+     font-size:11px;
+
+}
+
+.control-label{
+    text-align: left;
+    margin-left:10px;
+}

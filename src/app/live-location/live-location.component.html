@@ -1,0 +1,65 @@
+<simple-notifications [options]="options">
+</simple-notifications> 
+<div class="row">
+ <div>
+      <h3><b>Active Location Details</b></h3>
+    </div>
+<div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+            <input  class="form-control" placeholder="Search by Location Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchLivelocText">
+          </div>
+          <table style="margin-top:50px;"  class="table table-bordered">
+            <thead style="background-color:#1DA1F2">
+              <tr>
+                <th>Action</th>
+                <th>Location ID</th>
+                <th>Location Name</th>
+                <th>Campus Address</th>
+                <th>Location Image</th>
+                <th>Status</th>
+
+              </tr>
+            </thead>
+            <spinner name="mySpinner" group="foo"></spinner>
+            <tbody *ngFor='let data of arrLocLive | LocationName:searchLivelocText | paginate: { itemsPerPage: 10, currentPage: p,id:"p"}'>
+
+              <tr>
+
+                <td style="text-align:center">                 
+                    <a title="Delete User" data-toggle="modal" href="#{{data.location_id}}"> <span style="font-size:20px;color:#1DA1F2;"class="glyphicon glyphicon-trash"></span></a>
+                  <div class="modal fade" attr.id="{{data.location_id}}" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Alert</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p style="color:black"> Would you like to delete the vendor named <b><i style="color:black">"{{data.location_name}}"</i></b>                            from the table? If Yes Click on Confirm else Close the window.
+                          </p>
+                           <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-default" (click)="Delete(data.location_id)" data-dismiss="modal">Confirm</button> -->
+                            <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" data-dismiss="modal" (click)="ClearData()" >Close</button>
+                                                    <!-- <button type="button"  style="background-color:#FF4D4D" data-dismiss="modal">Close</button> -->
+                                                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="Delete(data.location_id)" data-dismiss="modal">Confirm</button>
+                            
+                          </div> 
+                          
+                          <!-- end of modal-footer-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{data.location_id}}</td>
+                <td>{{data.location_name}}</td>
+                <td>{{data.campus}}</td>
+                <td><img src="{{data.image_url}}"  style="width:150px; height:100px" /></td>
+                <td>{{data.status}}</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="p = $event" id="p" autoHide="true" directionLinks="true">
+          </pagination-controls>
+</div>

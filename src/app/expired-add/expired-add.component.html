@@ -1,0 +1,55 @@
+<simple-notifications [options]="options"></simple-notifications>
+<div>
+  <b style="font-size:25px;margin-top:0px;">InActive Advertisement details</b>
+</div>
+<div class="row" style="margin-bottom:20px;">
+
+  <div style="margin-bottom:20px;margin-top:20px;padding-left: 0px;" class="col-md-6 searchitem">
+   <input class="form-control" placeholder="Search by Advertisement Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchExAdText">
+  </div>
+ <table style="margin-top:50px;" class="table table-bordered">
+                        <thead style="background-color:#0288D1">
+                            <tr>
+
+                                <th>Advertisement ID</th>
+                                <th>Advertisement Name</th>
+                                <th>Contact Person</th>
+                                <th>Contact Email</th>
+                                <th>Contact Phone</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Advertisement Image</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                         <spinner name="mySpinner" group="foo"></spinner> 
+                        <!-- <tbody *ngIf='arrAdvertExpired===0'>
+                            <tr>
+                                <p>No Data Available</p>
+                            </tr>
+                        </tbody> -->
+                        <tbody *ngFor='let data of arrAdvertExpired | AdvertName:searchExAdText  |  paginate: { itemsPerPage: 10, currentPage: r ,id:"r"} '>
+
+                            <tr>
+
+
+                                <td>{{data._id}}</td>
+                                <td>{{data.ad_name}}</td>
+                                <td>{{data.contact_employee}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.phone}}</td>
+                                <td>{{data.ad_start_date}}</td>
+                                <td>{{data.ad_end_date}}</td>
+                                <td><img src="{{data.image_url}}"  style="width:150px; height:100px" /></td>
+                                <td>{{data.status}}</td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <pagination-controls (pageChange)="r = $event" id="r" autoHide="true" directionLinks="true">
+                    </pagination-controls>
+ 
+</div>

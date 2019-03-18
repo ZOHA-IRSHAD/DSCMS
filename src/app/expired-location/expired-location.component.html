@@ -1,0 +1,40 @@
+<div class="row">
+ <div>
+      <h3><b> InActive Location Details</b></h3>
+    </div>
+
+<div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+            <input class="form-control" placeholder="Search by Location Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchExLocText">
+          </div>
+          <table style="margin-top:50px;" class="table table-bordered">
+            <thead style="background-color:#1DA1F2">
+              <tr>
+
+                <th>Location ID</th>
+                <th>Location Name</th>
+                <th>Campus Address</th>
+                <th>Location Image</th>
+                <th>Status</th>
+
+              </tr>
+            </thead>
+            <spinner name="mySpinner" group="foo"></spinner>
+            <tbody *ngFor='let data of arrLocExpired | LocationName:searchExLocText | paginate: { itemsPerPage: 10, currentPage: q,id:"q"}'>
+              <!-- | paginate: { itemsPerPage: 5, currentPage: p }' -->
+              <tr>
+
+
+                <td>{{data.location_id}}</td>
+                <td>{{data.location_name}}</td>
+                <td>{{data.campus}}</td>
+                <td><img src="{{data.image_url}}"  style="width:150px; height:100px" /></td>
+                <td>{{data.status}}</td>
+
+
+              </tr>
+            </tbody>
+          </table>
+          <pagination-controls (pageChange)="q = $event" id="q" maxSize="5" autoHide="true" directionLinks="true">
+          </pagination-controls>
+
+</div>

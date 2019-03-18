@@ -1,0 +1,82 @@
+<simple-notifications [options]="options"></simple-notifications>
+<div>
+  <b style="font-size:25px;margin-top:0px;">Inactive Users </b>
+</div>
+<div class="row" style="margin-bottom:20px;">
+
+  <div style="margin-bottom:20px;margin-top:20px;padding-left: 0px;" class="col-md-6 searchitem">
+    <input class="form-control" placeholder="Search by User Name" name="srch-term1" id="srch-term1" type="text" [(ngModel)]="searchExpUserText">
+  </div>
+
+  <table style="margin-top:50px;" class="table table-bordered">
+    <thead style="background-color:#1DA1F2">
+      <tr>
+        <th>Action</th>
+        <th>User Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email ID</th>
+        <th>Phone Number</th>
+        <th>Date of Registration</th>
+        <th>Address</th>
+        <th>User type</th>
+        <th>Status</th>
+
+      </tr>
+    </thead>
+      <spinner name="mySpinner" group="foo"></spinner>
+    <tbody *ngIf='arrcomplete===0'>
+      <tr>
+        <p>No Data Available</p>
+      </tr>
+    </tbody>
+    <tbody *ngFor='let data of arrUserexp | UserName:searchExpUserText |paginate: { itemsPerPage: 10, currentPage: p,id: "p" }'>
+
+      <tr>
+
+
+        <td style="text-align:center">
+          <a title="Restore User" data-toggle="modal" href="#{{data.user_id}}"><i class="fa fa-undo fa-2x" aria-hidden="true" style="color:#1DA1F2"></i></a>
+          <div class="modal fade" attr.id="{{data.user_id}}" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+
+                  <h4 class="modal-title">Alert</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure you would like to Restore the user: "<b>{{data.firstname}} {{data.lastname}} </b>" ?
+                  </p>
+
+                  <br>
+                  <br>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" data-dismiss="modal">Close</button>
+                    <!-- <button type="button"  style="background-color:#FF4D4D" data-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="Resetuser(data.user_id)"
+                      data-dismiss="modal">Confirm</button>
+                  </div>
+                  <!-- end of modal-footer-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>{{data.user_id}}</td>
+        <td>{{data.firstname}}</td>
+        <td>{{data.lastname}}</td>
+        <td>{{data.email_id}}</td>
+        <td>{{data.contact_number}}</td>
+        <td>{{data.date}}</td>
+        <td>{{data.address}}</td>
+        <td>{{data.user_type}}</td>
+         <td>{{data.status}}</td> 
+
+      </tr>
+    </tbody>
+
+  </table>
+
+  <pagination-controls (pageChange)="p = $event" id="p" autoHide="true" directionLinks="true">
+  </pagination-controls>
+</div>

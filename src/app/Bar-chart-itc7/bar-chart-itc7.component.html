@@ -1,0 +1,51 @@
+ 
+<div class="col-sm-6">
+   <h3 style="color:black;">Steve Jobs ITC-7</h3>
+ <div   class="well"> 
+            
+          <div  class="well" id="p1">
+           
+           <h3 style="color:darkblue">{{firstday | date:'dd/MM/yyyy'}} - {{lastday | date:'dd/MM/yyyy'}}</h3>
+   <div style="display: block;background-color:#F5F5F5">
+<canvas baseChart *ngIf="loaded" class="chart"
+            [datasets]="barChartDataitc7week"
+            [labels]="barChartLabelsitc7week"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div></div></div>
+          <div   class="well">           
+          <div  class="well" id="p1">
+          <h3 style="color:darkblue">{{date | date:'MMMM'}}</h3>
+             <div style="display: block;background-color:#F5F5F5">
+<canvas baseChart *ngIf="loaded" class="chart"
+            [datasets]="barChartDataitc7month"
+            [labels]="barChartLabelsitc7month"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div></div></div>
+ <div   class="well">           
+          <div  class="well" id="p1">
+           <h3 style="color:darkblue">{{date | date:'yyyy'}}</h3>
+             <div style="display: block;background-color:#F5F5F5">
+<canvas baseChart *ngIf="loaded" class="chart"
+            [datasets]="barChartDataitc7year"
+            [labels]="barChartLabelsitc7year"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div></div></div>
+   
+
+   <!-- <p>{{this.barChartData}}</p> -->
+
+  
+
+</div> 

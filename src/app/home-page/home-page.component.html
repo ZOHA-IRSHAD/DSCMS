@@ -1,0 +1,166 @@
+<!--*************************************start Print and Refresh Button*****************************************************  -->
+<div class="row" style="height:50px;">
+
+  <b style="font-size:25px;margin-top:0px;"> Daily Dashboard- {{date | date: 'mediumDate'}}</b>
+  <button type="button" id="printButton"class="btn btn-default btn-sm pull-right" onclick="window.print();">
+         <i class="fa fa-print  fa-2x" aria-hidden="true" style="color:#1DA1F2"></i> Print
+        </button>
+
+  <button style="margin-right:10px;" id="RefreshButton" type="button" class="btn btn-default btn-sm pull-right" onclick="window.location.reload();">
+            <i class="fa fa-refresh  fa-2x" aria-hidden="true" style="color:#1DA1F2"></i> Refresh</button>
+</div><br>
+<!--*************************************End Print and Refresh Button*****************************************************  -->
+<div class="row">
+  <!--*************************************start New Users*****************************************************  -->
+  <div class="col-md-3" style="height:120px">
+    <div style="background-color:#FF5043;height: 110px;border:1px solid #FF5043">
+      <i class="fa fa-users fa-3x" style="color:#FFDCD9;padding-top: 10px;"></i>
+      <p style="font-size:30px;padding-right:20px;padding-top:20px;float:right;">{{registered_user}}</p><br>
+      <p style="color:white;padding-left:10px;font-size:20px"><br>New Users</p>
+    </div>
+  </div>
+
+  <!--*************************************End New Users*****************************************************  -->
+  <div class="col-md-3" style=" height:120px">
+    <div style="background-color:#59BC5D;height: 110px;border:1px solid #59BC5D;">
+      <i class="fa fa-eye fa-3x" style="color:#FFDCD9;padding-top: 10px;"></i>
+      <p style="font-size:30px;padding-right:20px;padding-top:20px;float:right;">{{active_users_today}}</p><br>
+      <p style="color:white;padding-left:10px;font-size:20px"><br>Visitors</p>
+    </div>
+  </div>
+  <div class="col-md-3" style="height:120px">
+    <div style="background-color:#1DA1F2;height: 110px;border:1px solid #1DA1F2 ">
+      <i class="fa fa-file-text fa-3x" style="color:#FFDCD9;padding-top: 10px;"></i>
+      <p style="font-size:30px;padding-right:20px;padding-top:20px;float:right;">{{orders_today}}</p><br>
+      <p style="color:white;padding-left:10px;font-size:20px"><br>Orders</p>
+    </div>
+  </div>
+  <div class="col-md-3" style="height:120px">
+    <div style="background-color:#FF642F;height: 110px;border:1px solid #FF642F">
+      <i class="fa fa-comments-o fa-3x" style="color:#FFDCD9;padding-top: 10px;"></i>
+      <p style="font-size:30px;padding-right:20px;padding-top:20px;float:right;">{{addFeed}}</p><br>
+      <p style="color:white;padding-left:10px;font-size:20px"><br>Daily Feedbacks</p>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+
+  <div class="well" style="background-color:#F4F5F7;border:0px;padding-top: 0px;padding-right: 0px;padding-left: 0px;margin-left: 22px;margin-right: 22px;">
+    <div class="container1" style="border:none;">
+      <p style="color:black;padding:10px 10px 0px 0px;text-align:center">User Feedback on Vendors</p>
+
+      <div style="display: block;width:200;height:150;border:1px solid #F4F5F7;">
+        <span class="pad-little" [hidden]="lineChartData.length == 0"></span>
+        <canvas baseChart width="400" height="120" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+          [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)" *ngIf="lineChartData.length > 0">></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-5">
+    <div class="Name" style="background-color:#F4F5F7">
+      <p style="color:black;padding-top:10px;text-align:center">All Vendor Reviews </p>
+      <div style="margin-bottom:10px;">
+
+        <table class="table table-bordered">
+           <thead style="background-color:#1DA1F2;color:white">
+            <tr>
+              <th>Vendor Name</th>
+              <th>Rating</th>
+              <th>User Reviews</th>
+
+
+
+            </tr>
+          </thead> 
+          <tbody *ngFor="let info of datadough">
+            <tr>
+              <td style="color:black">{{vendorForRecommendedItems(info.vendor_id)}}</td>
+              <td style="color:black"><rating [(ngModel)]="info.feedback" style="float:right;" [readonly]="true" fullIcon="★" emptyIcon="☆" [titles]="['Bad', 'Mediocre' , 'Good', 'Excellent', 'Awesome']"></rating> </td>
+               <td style="color:black">{{info.count}}</td> 
+
+
+
+            </tr>
+          </tbody>
+        </table>
+          
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-7" style="background-color:#F4F5F7">
+    <!-- border-left:1px solid #F4F5F7 -->
+    <p style="color:black;padding-top:10px;text-align:center">Most Liked Items </p>
+    <ul class="nav nav-tabs nav-justified">
+      <li class="active"><a data-toggle="tab" href="#Vegetarian" style="color:black">Vegetarian  <img width=20px height=20px src="./assets/veg_icon.png"></a></li>
+      <li><a data-toggle="tab" href="#Non-Vegetarian" style="color:black">Non Vegetarian  <img width=20px height=20px src="./assets/nonveg_icon.png"></a></li>
+    </ul>
+    <div class="tab-content">
+      <div id="Vegetarian" class="tab-pane fade in active">
+        <div style="margin-bottom:10px;">
+
+          <table class="table table-bordered">
+            <thead style="background-color:#1DA1F2;color:white">
+              <tr>
+                   <th>Item Name</th>
+                <th>Time of Service</th>
+             
+                <th>Vendor Name</th>
+
+
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let info of datatableveg">
+              <tr>
+               <td style="color:black">{{info.item_name}}</td>
+                <td style="color:black">{{TimesofService(info.TOS)}}</td>
+                
+                 <td style="color:black"> {{vendorForRecommendedItems(info.vendor_id)}}</td>
+
+
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div id="Non-Vegetarian" class="tab-pane fade">
+        <div style="margin-bottom:10px;">
+
+          <table class="table table-bordered">
+            <thead style="background-color:#1DA1F2">
+              <tr>
+               <th>Item Name</th>
+                <th>Time of Service</th>
+                
+                 <th>Vendor Name</th>
+                <!-- <th>Top Items</th> -->
+
+
+              </tr>
+            </thead>
+            <tbody *ngFor="let info of datatablenonveg">
+              <tr>
+               <td style="color:black">{{info.item_name}}</td>
+                <td style="color:black">{{TimesofService(info.TOS)}}</td>
+                
+                 <td style="color:black"> {{vendorForRecommendedItems(info.vendor_id)}}</td>
+                <!-- <td><i class="fa fa-arrow-up fa-2x" style="color:green"></i></td> -->
+
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="..\node_modules\chart.js\dist\Chart.bundle.min.js"></script>

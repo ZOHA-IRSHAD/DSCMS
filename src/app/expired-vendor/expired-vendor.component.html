@@ -1,0 +1,60 @@
+
+    <div>
+        <b style="font-size:25px;margin-top:0px;">Inactive Vendors</b>
+    </div>
+    <br>
+  <div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+                    <input class="form-control" placeholder="Search by Vendor Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchExVendText">
+                </div>
+                   <table style="margin-top:50px;padding-right:20px;width: 1800px;" class="table table-bordered">
+                    <thead style="background-color:#1DA1F2">
+                        <tr>
+
+                            <th>Vendor ID</th>
+                            <th>Vendor Name</th>
+                            <th>Contact Person</th>
+                            <th>Email ID</th>
+                            <th>Phone Number</th>
+                            <th>Service Start date</th>
+                            <th>Service End date</th>
+                            <th>Address</th>
+                            <th>Comments</th>
+                            <th>Logo</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                      <spinner name="mySpinner" group="foo">    </spinner>
+                    <tbody *ngIf='arrcomplete===0'>
+                        <tr>
+                            <p>No Data Available</p>
+                        </tr>
+                    </tbody>
+                    <tbody *ngFor='let data of arrcomplete | VendorName:searchExVendText |paginate: { itemsPerPage: 10, currentPage: q ,id:"q"}'>
+                        <!--  -->
+                        <tr>
+
+
+                            <td>{{data.vendor_id}}</td>
+                            <td>{{data.vendor_name}}</td>
+                            <td>{{data.contact_person}}</td>
+                            <td>{{data.email_address}}</td>
+                            <td>{{data.contact_number}}</td>
+                            <td>{{data.service_start_date}}</td>
+                            <td>{{data.service_end_date}}</td>
+                            <td>{{data.vendor_address}}</td>
+                            <td>{{data.comments}}</td>
+                            <td><img src="{{data.image_url}}"   style="width:150px; height:100px" /> </td>
+                            <td>{{data.from_Date}}</td>
+                            <td>{{data.to_Date}}</td>
+                            <td>{{data.status}}</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls>  -->
+                <pagination-controls (pageChange)="q = $event" id="q" autoHide="true" directionLinks="true">
+                </pagination-controls>

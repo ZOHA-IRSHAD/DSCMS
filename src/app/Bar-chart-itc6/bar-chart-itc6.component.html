@@ -1,0 +1,53 @@
+
+ 
+<div class="col-sm-6">
+   <h3 style="color:black;">Issac Newton ITC-6</h3>
+   <spinner name="mySpinner" group="foo"></spinner>
+ <div   class="well"> 
+            
+          <div  class="well" id="p1">
+           
+           <h3 style="color:darkblue">{{firstday | date:'dd/MM/yyyy'}} - {{lastday | date:'dd/MM/yyyy'}}</h3>
+   <div style="display: block;background-color:#F5F5F5">
+<canvas baseChart *ngIf="loaded" class="chart"
+            [datasets]="barChartDataitc6week"
+            [labels]="barChartLabelsitc6week"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div></div></div>
+          <div   class="well">           
+          <div  class="well" id="p1">
+          <h3 style="color:darkblue">{{date | date:'MMMM'}}</h3>
+             <div style="display: block;background-color:#F5F5F5">
+<canvas baseChart *ngIf="loaded" class="chart"
+            [datasets]="barChartDataitc6month"
+            [labels]="barChartLabelsitc6month"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div></div></div>
+ <div   class="well">           
+          <div  class="well" id="p1">
+           <h3 style="color:darkblue">{{date | date:'yyyy'}}</h3>
+             <div style="display: block;background-color:#F5F5F5">
+<canvas baseChart *ngIf="loaded" class="chart"
+            [datasets]="barChartDataitc6year"
+            [labels]="barChartLabelsitc6year"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+  </div></div></div>
+   
+
+   <!-- <p>{{this.barChartData}}</p> -->
+
+  
+
+</div> 

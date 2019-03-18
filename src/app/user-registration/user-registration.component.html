@@ -1,0 +1,80 @@
+<div id ="UserReg" class="col-sm-9">
+  <simple-notifications [options]="options"></simple-notifications>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <h2 style="text-align:center">Sign Up and Start Eating</h2>
+    <h5 >* Required field</h5>
+    <form class="form-horizontal" (ngSubmit)="onSubmit();isClickedOnce = !isClickedOnce;"  [formGroup]="RegistrationForm">
+        <div class="form-group test" >
+            <label class="control-label col-xs-3 required">First Name: &nbsp;<b style="color:#ff4d4d;">*</b> </label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="firstName" formControlName="firstname" placeholder="First Name" maxlength="25">
+                   <span class="help-block" *ngIf="!RegistrationForm.get('firstname').valid && RegistrationForm.get('firstname').touched" >Please enter a Valid Name</span>   
+
+            </div>
+        </div><!--end of form-group-->
+         <div class="form-group  test">
+            <label class="control-label col-xs-3" for="ContactPerson">Last Name:</label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name" formControlName="lastname" maxlength="25">
+                 <span class="help-block" *ngIf="!RegistrationForm.get('lastname').valid && RegistrationForm.get('lastname').touched" >Please enter a Valid Name</span>   
+            </div>
+        </div><!--end of form-group-->
+		 <div class="form-group">
+            <label class="control-label col-xs-3 test" for="inputEmail">Email ID:&nbsp;<b style="color:#ff4d4d;">*</b></label>
+            <div class="col-xs-9">
+                <input type="email" class="form-control" id="inputEmail" placeholder="exampleid@abcd.com" formControlName="email_id" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$" > 
+                   
+                  <span class="help-block" *ngIf="!RegistrationForm.get('email_id').valid && RegistrationForm.get('email_id').touched" >Please enter the Valid email</span>   
+            </div>
+       </div><!--end of form-group-->
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="phoneNumber">Phone Number:&nbsp;<b style="color:#ff4d4d;">*</b></label>
+            <div class="col-xs-9">
+                <input type="tel" class="form-control" id="phoneNumber" minlength="10" maxLength="10"placeholder="Phone Number" formControlName="contact_number">
+                <span class="help-block" *ngIf="!RegistrationForm.get('contact_number').valid && RegistrationForm.get('contact_number').touched" >Please enter the valid Phone Number</span>   
+            </div>
+        </div><!--end of form-group-->
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="UserName" >User ID:&nbsp;<b style="color:#ff4d4d;">*</b></label>
+            <div class="col-xs-9">
+                <input type="text" class="form-control" id="userId" placeholder="User ID" formControlName="user_id" minlength="4" maxlength="20" >
+                <span class="help-block" *ngIf="!RegistrationForm.get('user_id').valid && RegistrationForm.get('user_id').touched" >Please enter a Valid ID</span>   
+            </div>
+        </div><!--end of form-group-->
+         <div class="form-group">
+            <label class="control-label col-xs-3" for="password" >Password:&nbsp;<b style="color:#ff4d4d;">*</b></label>
+            <div class="col-xs-9">
+                <input type="password" class="form-control" id="pwd" placeholder="Password" formControlName="password" minlength="8" pattern="(?=^.{8,16}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;'?/&gt;.&lt;,])(?!.*\s).*$">
+                <span class="help-block" *ngIf="RegistrationForm.get('password').invalid && RegistrationForm.get('password').touched">Password must contain atleast 8 characters with at least 1 upper case character, 1 lower case character, 1 numerical character, 1 special character</span>     
+            </div>
+        </div><!--end of form-group-->
+          <div class="form-group">
+            <label class="control-label col-xs-3" for="password" >Confirm Password:&nbsp;<b style="color:#ff4d4d;">*</b></label>
+            <div class="col-xs-9">
+                <input type="password" class="form-control" id="confirmpwd" placeholder="Confirm Password" formControlName="Confirmpassword">
+                  <span class="help-block" *ngIf="!(RegistrationForm.get('password').value==RegistrationForm.get('Confirmpassword').value)">Password mismatch</span>      
+            </div>
+          </div><!--end of form-group-->
+        <div class="form-group">
+            <label class="control-label col-xs-3" for="postalAddress">Address:&nbsp;<b style="color:#ff4d4d;">*</b></label>
+            <div class="col-xs-9">
+                <textarea rows="3" class="form-control" id="postalAddress" placeholder="Address" formControlName="address"  ></textarea>
+                <span class="help-block" *ngIf="!RegistrationForm.get('address').valid && RegistrationForm.get('address').touched" >please enter address</span>
+            </div>
+        </div><!--end of form-group-->  
+        <br>
+        <div class="form-group submit-button" >
+                <button type="submit" class="btn btn-danger" [disabled]="(!RegistrationForm.valid) || !(RegistrationForm.get('password').value==RegistrationForm.get('Confirmpassword').value)|| isClickedOnce">
+                    <span class="text">{{isClickedOnce ? '&nbsp;&nbsp;Registering' : '&nbsp;&nbsp;Register'}} </span>
+                    <span *ngIf="isClickedOnce"> <i class="fa fa-spinner fa-spin"></i></span>
+                </button>
+                <button type="reset" class="btn btn-danger" value="Reset" (click)="ResetForm(RegistrationForm)">Reset</button>
+        </div><!--end of submit-button--> 
+    </form><!--end of form-->
+    </div><!--end of column-->
+  </div><!--end of row-->
+        <h4 style="text-align:center">
+          Alreday have an account?<a [routerLink]="['/']">Log In</a>
+        </h4>
+</div><!--end of UserReg-->

@@ -1,0 +1,41 @@
+#connectiontimedOut {
+   background: url('/assets/0.png') no-repeat center;
+   width: 100%;
+   height: 600px;     
+   background-attachment: fixed; 
+}
+
+#notFound {
+   background: url('/assets/404.png') no-repeat center;
+   width: 100%;
+   height: 638px;     
+   background-attachment: fixed; 
+}
+
+#wrong {
+   background: url('/assets/unexp.png') no-repeat center;
+   width: 100%;
+   height: 638px;     
+   background-attachment: fixed; 
+}
+
+#ServerError {
+   background: url('/assets/500.png') no-repeat center;
+   width: 100%;
+   height: 638px;     
+   background-attachment: fixed; 
+}
+
+#routing{
+    /* margin-top: 500px; */
+    /* text-align: center; */
+    /* .centered { */
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+a:link {
+    text-decoration: underline;
+}

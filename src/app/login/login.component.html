@@ -1,0 +1,43 @@
+<div id="Login">
+  <div class="container-fluid">
+      <div class="row">
+        <img src="/assets/tm.png" alt="Smiley face" class="img-responsive" width="300px" height="300px">
+      </div>
+      <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <h2>LogIn</h2>
+            <hr><br>
+            <form [formGroup] = "loginForm" novalidate (ngSubmit)="onSubmit(loginForm);isClickedOnce = !isClickedOnce; " autocomplete="on"> 
+                <div *ngIf="loginForm.errors" class="alert alert-danger">
+                    LAN ID or password is invalid.
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input formControlName="user_id" type="text" class="form-control" [maxlength]="15" placeholder="LAN ID" autofocus="autofocus">  
+                </div> 
+                  <div class="input-group">
+                     <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                     <input formControlName="password" type="password" class="form-control" [maxlength]="30" placeholder="Password">   
+                </div><br><br>  
+                <div class="divholdingsubmitbutton">
+                      <button type="submit"  class="btn btn-danger" value="Login" [disabled]="!loginForm.valid  || isClickedOnce ">
+                            <span class="text">{{isClickedOnce ? '&nbsp;&nbsp;Logging' : '&nbsp;&nbsp;Log In'}} </span>
+                            <span *ngIf="isClickedOnce"> <i class="fa fa-spinner fa-spin"></i></span>
+                      </button><!--end of divholdingsubmitbutton--> 
+                </div>
+            </form><!--end of form-->
+          </div><!--end of column-->
+      </div><!--end of row-->
+  </div><!--end of container-fluid-->
+ 
+  <h4 style="text-align:center">
+      <a [routerLink]="['/forgotPassword']">Forgot Password ? </a>
+  </h4>
+  <h4 style="text-align:center"> Don't have an account? 
+     <a [routerLink]="['/userRegistration']">Sign up</a><br> 
+  </h4>
+</div> <!--end of Login-->
+
+    
+
+

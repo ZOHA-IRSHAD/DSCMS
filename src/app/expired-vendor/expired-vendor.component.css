@@ -1,0 +1,26 @@
+.table
+{
+    border:1px solid lightgray;
+    
+}
+
+h1,h2,h3,h4,h5,h6,p,li,i,b,td{
+    font-family: quicksand;
+    color:Black;
+}
+th{
+    font-family: quicksand;
+    color:white
+}
+td{
+    font-size:11px;
+    text-align:left;
+}
+th{
+    text-align: center ;
+     font-size:11px;
+
+}
+
+
+

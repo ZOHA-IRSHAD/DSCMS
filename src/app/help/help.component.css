@@ -1,0 +1,78 @@
+/* The sidebar menu */
+
+.sidenav {
+    height: 500px;
+    width: 220px;
+    position: relative;
+    z-index: 0;
+    background-color: #ccc;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+hr{
+    border: 1px solid #ff4d4d;
+}
+
+/* The navigation menu links */
+
+.sidenav li {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: black;
+    display: block;
+    font-family: 'Quicksand';
+    width: 100%;
+}
+
+.sidenav > ul > li.active {
+   width: 110%;
+} 
+
+.sidenav > ul > li:hover {
+   width: 110%;
+} 
+
+
+.sidenav > ul > li > a {
+    color: #000;
+    text-decoration: none;
+} 
+
+.sidenav > ul > li.active > a:link {
+    color: #ff4d4d;
+} 
+
+.tab-content {
+    font-family: 'Quicksand';
+    color: black;
+}
+
+.panel-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.panel-body {
+    color: #595959;
+    font-size: 14px;
+    font-weight: normal;
+    word-wrap: break-word;
+}
+
+a{
+    text-decoration: none;
+}
+
+.tab-content{
+    max-height: 510px;
+    overflow-y: auto;    
+}
+
+
+@media (max-width: 425px){
+  .sidenav{
+    max-height: 180px;
+  }
+}

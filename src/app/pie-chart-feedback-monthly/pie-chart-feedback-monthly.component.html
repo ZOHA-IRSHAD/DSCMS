@@ -1,0 +1,14 @@
+<div class="col-sx-9">
+
+  <div style="display: block;height:300px;">
+  <canvas  style="height:300px;width:500px;" baseChart
+              [data]="doughnutChartData_monthly"
+              [labels]="doughnutChartLabels"
+              [chartType]="doughnutChartType"
+             [colors]="chartColors"
+              [options]="chartOptions"
+             
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas> 
+
+  </div></div> 

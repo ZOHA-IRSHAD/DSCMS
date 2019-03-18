@@ -1,0 +1,28 @@
+
+  li,h1,h2,h3,h4,h5,h6,p,b,td{
+    font-family:quicksand;
+    color:black;
+}
+th{
+   font-family:quicksand;
+    
+}
+h5{
+   font-size:11px;
+   text-align: left; 
+}
+td{
+    font-size:11px;
+    text-align:left;
+}
+th{
+    text-align: center ;
+     font-size:11px;
+ color:white
+}
+.help-block{
+    color:red;
+}
+ button{
+    color:white
+  }

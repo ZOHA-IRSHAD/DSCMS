@@ -1,0 +1,52 @@
+<h3 >Order Details</h3>
+<div class= "container" style="min-height: 520px;">
+    <div style="clear: both">
+           <h4 style="float: left">Order Id : {{orderDetails?.order_id}}</h4>
+           <h4 style="float: right">Date : {{orderDetails?.date}}</h4>     
+    </div>
+    <div style="clear: both">
+            <h4 style="float: left">Payment Mode : {{orderDetails?.method}}</h4>
+            <h4 style="float: right">Time : {{orderDetails?.transaction_time}}</h4>
+    </div>
+    <div style="clear: both">
+        <h4 style="float: left">Vendor : {{orderDetails?.items[0].vendor_name}}</h4>
+    </div>
+    <br><br><br>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <!-- <th>Vendor</th> -->
+                    <th>Quantity</th>
+                    <th>Rate Per Plate (<i class="fa fa-inr"  aria-hidden="true" style="color:black"></i>)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of orderDetails?.items">
+                    <td>
+                       {{item?.item_name}}
+                    </td>
+                    <!-- <td>
+                       {{item?.vendor_name}}
+                    </td> -->
+                    <td>
+                       {{item?.quantity}}
+                    </td>  
+                    <td>
+                       {{item?.amount}}
+                    </td>
+                </tr>
+            </tbody>
+        </table><!--end of table-->
+    </div><!--end of table-responsive-->
+    <h2>Total : <i class="fa fa-inr text-success"  aria-hidden="true"></i>{{orderDetails?.total_amount}}</h2>
+    <!-- <h4>Collect your order within : {{orderDetails?.collection_time}}</h4> -->
+    <h3>Thank you.....! Order Again :)</h3>
+    <h4>Help us improve providing feedback for the order in My Orders -> Order History -> History</h4>
+    <div class="col-md-12 text-center"> 
+         <button type="button" class="btn btn-default btn-sm" id="printButton" onclick="window.print();">
+              <span class="glyphicon glyphicon-print"></span> Print Receipt
+         </button> 
+    </div>
+</div><!--end of container-->

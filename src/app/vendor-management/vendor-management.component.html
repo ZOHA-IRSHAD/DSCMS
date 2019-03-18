@@ -1,0 +1,171 @@
+<simple-notifications [options]="options"></simple-notifications>
+
+    <div>
+        <b style="font-size:25px;margin-top:0px;">Vendor Management</b>
+    </div>
+    <br>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab"  href="#Live" style="font-size:15px;">Active Vendors</a></li>
+        <li><a data-toggle="tab" href="#expired" style="font-size:15px;">InActive Vendors</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="Live" class="tab-pane fade in active">
+            <div style="margin-bottom:10px;">
+                <div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+                    <input class="form-control" placeholder="Search by Vendor Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchLiveVendorText">
+                </div>
+                <table style="margin-top:50px;padding-right:20px;width:1800px;" class="table table-bordered">
+                   
+                    <thead style="background-color:#1DA1F2">
+                        <tr>
+                            <th>Action</th>
+                            <th >Vendor ID</th>
+                            <th>Vendor Name</th>
+                            <th>Contact Person</th>
+                            <th>Email ID</th>
+                            <th>Phone Number</th>
+                            <th>Service Start date</th>
+                            <th>Service End date</th>
+                            <th>Address</th>
+                            <th>Logo</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngIf='arrLive===0'>
+                        <tr>
+                            <p>No Data Available</p>
+                        </tr>
+                    </tbody>
+                    <tbody *ngFor='let data of arrLive |VendorName:searchLiveVendorText |paginate: { itemsPerPage: 5, currentPage: p,id: "p" }'>
+                        <!-- ' -->
+                        <tr>
+
+                            <td style="text-align:center">
+                                <a data-toggle="modal" href="#{{data.vendor_id}}"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color:#1DA1F2"></i></a>
+                                <div class="modal fade" attr.id="{{data.vendor_id}}" role="dialog">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+
+                                                <h4 class="modal-title">Alert</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Please choose one of the option if you would like to terminate or Suspend
+                                                    the Vendor "<b>{{data.vendor_name}}</b>"</p>
+                                          
+                                                   <p> 
+                                                     <input type="radio" name="status" value="Terminated" checked (click)="setradio('Terminated')" >Terminated<br>
+                                                                                        
+                                                    <input type="radio" name="status" value="Suspended" (click)="setradio('Suspended')" >Suspended<br></p>
+                                          
+                                                <div *ngIf="isSelectedLink('Suspended')">
+                                                      <p>  From:  <i style="color:red;">*</i> <input type="date" min="{{today | date:'yyyy-MM-dd'}}" [(ngModel)]="FromDate" placeholder="dd-MM-yyyy" > &nbsp;&nbsp;
+                                                        To:   <i style="color:red;">*</i>  <input type="date" min="{{today | date:'yyyy-MM-dd'}}"  [(ngModel)]="ToDate" placeholder="dd-MM-yyyy">
+                                                        <!-- <span class="help-block" *ngIf="(this.FromDate> this.ToDate)||(this.FromDate== this.ToDate)">Please enter a valid End Date.The Start Date must be Less than the End Date</span>  -->
+                                                      </p>
+                                                    </div>
+                                                <p>    <br> Reason For Termination/Suspension:<i style="color:red;">*</i><br> <textarea width="100%" height="100%"  [(ngModel)]="Reason"></textarea><br><br>
+                                                 
+                                                    
+                                                    <b style="float:right;padding-right:5px;color:red;" class="pull-left">* Required field</b> 
+                                                   </p>  
+                                          
+                                                
+<br>
+<br>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" data-dismiss="modal" (click)="ClearData()" >Close</button>
+                                                    <!-- <button type="button"  style="background-color:#FF4D4D" data-dismiss="modal">Close</button> -->
+                                                    <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="Delete(data.vendor_id)"
+                                                        data-dismiss="modal">Confirm</button>
+                                                </div>
+                                                <!-- end of modal-footer-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td >{{data.vendor_id}}</td>
+                            <td>{{data.vendor_name}}</td>
+                            <td>{{data.contact_person}}</td>
+
+                            <td >{{data.email_address}}</td>
+                            <td>{{data.contact_number}}</td>
+                            <td>{{data.service_start_date}}</td>
+                            <td>{{data.service_end_date}}</td>
+                            <td>{{data.vendor_address}}</td>
+                            <td><img src="{{data.image_url}}"   style="width:150px; height:100px" /> </td>
+                            <td>{{data.status}}</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                <pagination-controls (pageChange)="p = $event" id="p" autoHide="true" directionLinks="true">
+                </pagination-controls>
+            </div>
+        </div>
+
+        <div id="expired" class="tab-pane fade">
+
+            <div class="col-md-12" style="margin-bottom:10px;">
+                <div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+                    <input class="form-control" placeholder="Search by Vendor Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchExVendText">
+                </div>
+
+                <table style="margin-top:50px;padding-right:20px;width: 1800px;" class="table table-bordered">
+                    <thead style="background-color:#1DA1F2">
+                        <tr>
+
+                            <th>Vendor ID</th>
+                            <th>Vendor Name</th>
+                            <th>Contact Person</th>
+                            <th>Email ID</th>
+                            <th>Phone Number</th>
+                            <th>Service Start date</th>
+                            <th>Service End date</th>
+                            <th>Address</th>
+                            <th>Comments</th>
+                            <th>Logo</th>
+                            <th>From Date</th>
+                            <th>To Date</th>
+                            <th>Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody *ngIf='arrcomplete===0'>
+                        <tr>
+                            <p>No Data Available</p>
+                        </tr>
+                    </tbody>
+                    <tbody *ngFor='let data of arrcomplete | VendorName:searchExVendText |paginate: { itemsPerPage: 5, currentPage: q ,id:"q"}'>
+                        <!--  -->
+                        <tr>
+
+
+                            <td>{{data.vendor_id}}</td>
+                            <td>{{data.vendor_name}}</td>
+                            <td>{{data.contact_person}}</td>
+                            <td>{{data.email_address}}</td>
+                            <td>{{data.contact_number}}</td>
+                            <td>{{data.service_start_date}}</td>
+                            <td>{{data.service_end_date}}</td>
+                            <td>{{data.vendor_address}}</td>
+                            <td>{{data.comments}}</td>
+                            <td><img src="{{data.image_url}}"   style="width:150px; height:100px" /> </td>
+                            <td>{{data.from_Date}}</td>
+                            <td>{{data.to_Date}}</td>
+                            <td>{{data.status}}</td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls>  -->
+                <pagination-controls (pageChange)="q = $event" id="q" autoHide="true" directionLinks="true">
+                </pagination-controls>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,10 @@
+/* Styles */
+  #successdiv 
+{
+    font-family: "Quicksand";
+    font-size: 25px;
+    text-align:center;
+    position: fixed; 
+     margin-top: 50px;      
+      margin-left: 35%;
+}   

@@ -1,0 +1,141 @@
+<simple-notifications [options]="options"></simple-notifications>
+<!-- <div class="col-sm-9"> -->
+<div>
+        <b style="font-size:25px;margin-top:0px;">Vendor Registration Form</b>
+    </div>
+<h5 style="float:right;padding-right:5px;color:red;">* Required field</h5>
+<br>
+<form class="form-horizontal" style="padding-left: 0px;" [formGroup]="RegistrationForm">
+
+    <div class="form-group">
+        <label class="control-label col-xs-2" style="width:180px">Vendor Name: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="vendorName" formControlName="vendor_name" placeholder="Vendor Name">
+            <span class="help-block" *ngIf="!RegistrationForm.get('vendor_name').valid && RegistrationForm.get('vendor_name').touched">Please enter the Valid Vendor Name</span>
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-2" style="width:180px"  for="ContactPerson">Contact Person: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="contact Person" placeholder="Contact Person" formControlName="contact_person">
+            <span class="help-block" *ngIf="!RegistrationForm.get('contact_person').valid && RegistrationForm.get('contact_person').touched">Please enter the Valid Contact Person Name</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px"  for="inputEmail">Email Address: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email Address" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+                formControlName="email_address">
+            <span class="help-block" *ngIf="!RegistrationForm.get('email_address').valid && RegistrationForm.get('email_address').touched">Please enter the Valid email</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px"  for="phoneNumber">Phone Number: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="tel" class="form-control" id="phoneNumber" minlength="10" maxLength="10" placeholder="Phone Number" formControlName="contact_number">
+            <span class="help-block" *ngIf="!RegistrationForm.get('contact_number').valid && RegistrationForm.get('contact_number').touched">Please enter the valid Phone Number</span>
+        </div>
+    </div>
+     <div class="form-group">
+       <label class="control-label  col-xs-3"    >Service Start date: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+          <input type="date" min="{{today | date:'yyyy-MM-dd'}}" formControlName="service_start_date"> 
+           (mm -Month,dd- Date,yyyy-year)          
+        </div>
+    </div>
+ <div class="form-group">
+       <label class="control-label col-xs-3" >Service End date: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+           <input type="date" min="{{today | date:'yyyy-MM-dd'}}" formControlName="service_end_date">
+           (mm -Month,dd- Date,yyyy-year)
+            <span class="help-block" *ngIf="!(RegistrationForm.get('service_end_date').value >= RegistrationForm.get('service_start_date').value)">Please enter a valid End Date.The Start Date must be Less than the End Date</span>
+        </div>
+    </div>
+  
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px"  for="postalAddress">Postal Address: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <textarea rows="3" class="form-control" id="postalAddress" placeholder="Postal Address" formControlName="vendor_address"></textarea>
+            <span class="help-block" *ngIf="!RegistrationForm.get('vendor_address').valid && RegistrationForm.get('vendor_address').touched">please enter Vendor address</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px">Food Category:<b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <h5>Hold down the Ctrl then use left mouse click button to select multiple options</h5>
+
+            <select multiple formControlName="food_cat" style="width:180">
+                    <option  *ngFor="let Category of Categories" [value]="Category.Cat_id" >{{Category.Cat_name}}</option>
+                </select>
+            <span class="help-block" *ngIf="!RegistrationForm.get('food_cat').valid && RegistrationForm.get('food_cat').touched">Please select atleast Food Category</span>
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px" >Time of Service: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <h5>Hold down the Ctrl then use left mouse click button to select multiple options</h5>
+
+            <select multiple formControlName="time_of_service_id" style="width:50;height:100px">
+                    <option  *ngFor="let TOS of Timeofservice" [value]="TOS.TOS_id" >{{TOS.Time_of_service_name}}</option>
+                </select>
+            <span class="help-block" *ngIf="!RegistrationForm.get('time_of_service_id').valid && RegistrationForm.get('time_of_service_id').touched">Please select atleast one Time of Service</span>
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px" >Campus Location: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+
+            <select style="height:30px" formControlName="location_id">
+                    <option  style="font-size:20px;" value=null disabled selected hidden>--Select Location--</option>
+                    <option   *ngFor="let Loc of Location" [value]="Loc.Location_id">{{Loc.Location_name}}</option>
+                     
+                </select>
+            <span class="help-block" *ngIf="!RegistrationForm.get('location_id').valid && RegistrationForm.get('location_id').touched">Please select a Location</span>
+        </div>
+    </div>
+    <div class="form-group">
+         <label class="control-label  col-xs-3" style="width:180px;"  style="color:black">Upload Image:<b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+           <input type="file" #fileInput name="Choose Image" placeholder="Choose image..." (change)="selectFile($event)" >
+        </div>
+    </div>
+   
+
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-9">
+            <button type="submit" class="btn btn-info btn-lg" style="background-color:#1DA1F2" data-toggle="modal" data-target="#myModal"
+                [disabled]="!RegistrationForm.valid">Submit</button>
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Confirmation Window</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Please confirm if the Registration is done correctly.If not please press Cancel else Confirm
+                                button
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#1DA1F2">Cancel</button>
+                            <button type="button" class="btn btn-default" (click)="onSubmit(RegistrationForm)" style="background-color:#1DA1F2" data-dismiss="modal">Confirm</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="reset" class="btn btn-info btn-lg" value="Reset" (click)="this.RegistrationForm.reset()" style="background-color:#1DA1F2">Reset</button>
+        </div>
+    </div>
+</form>
+<!-- </div> -->

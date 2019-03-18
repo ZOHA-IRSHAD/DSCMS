@@ -1,0 +1,88 @@
+<div id="throbber" style="display:none; min-height:120px;"></div>
+<div id="noty-holder"></div>
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://cijulenlinea.ucr.ac.cr/dev-users/" style="padding-top: 0px;">
+                <!-- <img src="" alt="LOGO"> -->
+                <h3 style="color:white;margin-top: 5px;"><img src="/assets/FinalLogo.png" alt="SmartCafe Logo" style="width: 150px;
+    height: 50px;
+    padding-top: 0px;
+    margin-top: 0px;">
+</h3>
+            </a>
+        </div>
+        <!-- Top Menu Items -->
+        <ul class="nav navbar-right top-nav">
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi,{{Name?.username}}  <b  class="fa fa-angle-down"></b></a>
+                <ul class="dropdown-menu">
+                    
+                    <li><a href="/"><i class="fa fa-fw fa-power-off"style="color:#1DA1F2"></i> Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li><a style="color:whitesmoke;font-family: Quicksand;font-size: 14px;" routerLink="/left-nav-bar/home-page" routerLinkActive="active"><i class="fa fa-home " style="color:#1DA1F2 ;" aria-hidden="true"></i><b>&nbsp;&nbsp; Home</b></a></li>
+                <li><a style="color:whitesmoke;font-family: Quicksand;font-size: 14px;" routerLink="/left-nav-bar/vendor-registration" routerLinkActive="active" ><i class="fa fa-registered " style="color:#1DA1F2 ;"aria-hidden="true"></i> <b>&nbsp;&nbsp; Vendor Registration</b></a></li>
+                <!-- <li><a style="color:whitesmoke;font-family: Quicksand;font-size: 14px;" routerLink="/left-nav-bar/vendor-management" routerLinkActive="active"><i class="fa fa-tasks " style="color:#1DA1F2 ;"aria-hidden="true"></i><b>&nbsp;&nbsp;Vendor Management </b></a></li> -->
+                 <li><a data-toggle="collapse" data-parent="#accordion" href="#collapsefour" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><span class="fa fa-tasks"  style="color:#1DA1F2"> </span><b>&nbsp;&nbsp;&nbsp; Manage Vendor</b>&nbsp;<span style="color:white"class="fa fa-sort-down"></span></a> 
+                      <ul class="collapse" id="collapsefour">
+                      <li><a routerLink="/left-nav-bar/live-vendor" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;Active Vendor</b></a></li>
+                      <li><a routerLink="/left-nav-bar/expired-vendor" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;InActive Vendor</b></a></li>
+                </ul> 
+                <li><a style="color:whitesmoke;font-family: Quicksand;font-size: 14px;" routerLink="/left-nav-bar/Dashboard" routerLinkActive="active" ><i class="fa fa-envelope " style="color:#1DA1F2 ;" aria-hidden="true"></i> <b>&nbsp;&nbsp; Feedback Dashboard</b></a></li>
+                
+                 <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><span class="fa fa-users"  style="color:#1DA1F2"> </span><b>&nbsp;&nbsp;&nbsp; User Management</b>&nbsp;<span style="color:white"class="fa fa-sort-desc "></span></a>
+                      <ul class="collapse" id="collapseThree">
+                      <li><a routerLink="/left-nav-bar/add-user" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-user "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;Add User</b></a></li>
+                      <li><a routerLink="/left-nav-bar/live-user" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;Active Users</b></a></li>
+                       <li><a routerLink="/left-nav-bar/expired-user" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;InActive Users</b></a></li> 
+                </ul>
+
+                 <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><span class="fa fa-map-marker"  style="color:#1DA1F2"> </span><b>&nbsp;&nbsp;&nbsp; Manage Location</b>&nbsp;<span style="color:white"class="fa fa-sort-down"></span></a> 
+                      <ul class="collapse" id="collapseOne">
+                      <li><a routerLink="/left-nav-bar/location" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-registered "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;Register Location</b></a></li>
+                      <li><a routerLink="/left-nav-bar/live-location" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;Active Locations</b></a></li>
+                      <li><a routerLink="/left-nav-bar/expired-location" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;&nbsp;InActive Locations</b></a></li>
+                </ul> 
+                     <li class="divider"></li>
+                   <li><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><span class="fa fa-buysellads"  style="color:#1DA1F2"> </span><b>&nbsp;&nbsp;&nbsp; Manage Advertisement</b>&nbsp;<span style="color:white"class="fa fa-sort-desc "></span></a>
+                      <ul class="collapse" id="collapseTwo">
+                      <li><a routerLink="/left-nav-bar/advertisement-management" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-registered "style="color:#1DA1F2"></i><b>&nbsp;Register Advertisement</b></a></li>
+                       <li><a routerLink="/left-nav-bar/live-add" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;Active Advertisement</b></a></li> 
+                       <li><a routerLink="/left-nav-bar/expired-add" routerLinkActive="active" style="color:whitesmoke;font-family: Quicksand;font-size: 14px;"><i class="fa fa-list "style="color:#1DA1F2"></i><b>&nbsp;InActive Advertisement</b></a></li> 
+                </ul>
+                <!-- routerLink="/left-nav-bar/advertisement-management" -->
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+
+    <div style="Margin-top:50px;" id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row" id="main">
+                <div class="col-sm-12 col-md-12"  id="content">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->

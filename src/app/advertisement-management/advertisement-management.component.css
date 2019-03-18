@@ -1,0 +1,59 @@
+.form-horizontal 
+{
+  border: 1px solid lightgray;
+  padding:30px;
+}
+  h1,h2,h3,h4,h5,h6,p,td,b,th{
+    font-family: quicksand;
+    color:black;
+}
+h5{
+   font-size:11px;
+   text-align: left; 
+}
+td{
+    font-size:11px;
+    text-align:left;
+}
+th{
+    text-align: center ;
+     font-size:11px;
+
+}
+h1{
+        margin: 30px 0;
+        padding: 0 200px 15px 0;
+        border-bottom: 1px solid #E5E5E5;
+    }
+	.bs-example{
+    	margin: 20px;
+    }
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+input.ng-invalid.ng-touched{
+    border:1px solid darkred;}
+th{
+    color:white;
+    size:35px;
+}
+
+.help-block{
+    color:red;
+}

@@ -1,0 +1,36 @@
+/* Styles */
+#Login {
+   background-image: url('/assets/pexels-photo.jpeg');
+   width: 100%;
+   height: 638px;     
+   background-attachment: fixed; 
+}
+.fa
+{
+    color: #fff;
+}
+.demo
+{
+    margin-top: 100px; 
+}
+button
+{
+    font-family: 'Quicksand';
+    font-size: 20px;
+}
+.divholdingsubmitbutton
+{
+    text-align: center;
+}
+h2
+{
+    font-family: 'Quicksand';
+    font-size: 40px;
+    font-weight: 30px;
+    text-align: center;
+    color:#ff4d4d ;
+}
+hr{
+   
+    border: 1px solid #ff4d4d;
+}

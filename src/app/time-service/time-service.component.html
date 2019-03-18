@@ -1,0 +1,232 @@
+<div class="container-fluid" style="min-height:520px">
+  <div class="row breadcrumb-body">
+    <div class="col-md-4 col-sm-12 col-xs-12">
+      <div class="middle-section-breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/navBar/home">Home</a></li>
+          <li class=active>{{nameOfBuilding}} &nbsp;&nbsp; {{idOfBuilding}}</li>
+        </ol>
+      </div>
+      <!--end of class of middle-section-breadcrumb-->
+    </div>
+    <!--end of column of middle-section-breadcrumb-->
+  </div>
+  <!--end of breadcrumb-body-->
+  <hr>
+  <div class="row">
+    <div class="col-md-3 col-sm-12 col-xs-12">
+      <select id="service" class="selectpicker show-tick" title="Select Time Of Service" (change)="getTOS($event.target.value)">
+          <option *ngFor="let service of service_details" value="{{service.service_id}}" [disabled] = "!enableTOS(service.service_id)">
+          <img src="{{service.image_url}}" class="img-responsive" style="width:30px ;height:30px">   {{service?.service_name}}
+          </option> 
+        </select>
+      <button type="button" class="btn btn-secondary" (click)="resetFilter('1')" data-toggle="tooltip" title="Clear">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+    </div>
+    <!--end of column-->
+    <div class="col-md-3 col-sm-12 col-xs-12 ">
+      <select id="vendor" class="selectpicker show-tick" data-live-search="true" data-size="5" title="Select Vendor" (change)="getVendor($event.target.value)">
+          <option *ngFor="let vendor of vendorDetails" value="{{vendor.vendor_id}},{{vendor.vendor_name}}">
+            <img src="{{vendor.image_url}}" class="img-responsive" style="width:30px ;height:30px"> {{vendor?.vendor_name}}
+          </option>
+        </select>
+      <button type="button" class="btn btn-secondary" (click)="resetFilter('2')" data-toggle="tooltip" title="Clear">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+    </div>
+    <!--end of column-->
+    <div class="col-md-3 col-sm-12 col-xs-12 ">
+      <select id="category" class="selectpicker show-tick" title="Select Category" (change)="getCategory($event.target.value)">
+          <option *ngFor="let category of categoryDetails" value="{{category.cat_id}},{{category.cat_name}}" >
+           <img src="{{category.image_url}}" class="img-responsive" style="width:30px ;height:30px">  {{category.cat_name}}
+          </option> 
+           <option value="both">
+            <img src='/assets/veg-non_veg.jpg' class="img-responsive" style="width:30px;height:30px"> 
+             All
+           </option>
+        </select>
+      <button type="button" class="btn btn-secondary" (click)="resetFilter('3')" data-toggle="tooltip" title="Clear">
+        <i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+    </div>
+    <!--end of column-->
+    <div class="col-md-3 col-sm-12 col-xs-12">
+      <input class="form-control" placeholder="Search by Item Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchText">
+    </div>
+    <!--end of column-->
+  </div>
+  <!--end of row-->
+  <hr>
+  <div class="row pull-right" style="margin-right:1em">
+    <button type="button" class="btn btn-secondary" style="margin-right:1em;margin-top:.5em" (click)="resetFilter('0')"><i class="fa fa-refresh" aria-hidden="true"></i> Clear All Filters </button>
+    <!-- </div> -->
+    <!--end of column-->
+    <!-- <div class="col-md-2 col-sm-6 col-xs-12"> -->
+    <div>
+      <span class="pointer" (click)="sort('amount_per_plate')">
+        <strong> Sort By : </strong> Price 
+        <i class="fa" [ngClass]="{'fa-sort': column != 'amount_per_plate', 'fa-sort-asc': (column == 'amount_per_plate' && isDesc), 'fa-sort-desc': (column == 'amount_per_plate' && !isDesc) }" aria-hidden="true"> </i>
+      </span>
+      <span class="pointer" (click)="sort('average_feedback')">
+        | Rating
+        <i class="fa" [ngClass]="{'fa-sort': column != 'average_feedback', 'fa-sort-asc': (column == 'average_feedback' && isDesc), 'fa-sort-desc': (column == 'average_feedback' && !isDesc) }" aria-hidden="true"> </i>
+      </span>
+    </div>
+    <!--end of column-->
+  </div>
+  <!--end of row-->
+
+
+  <div class="row todaysmenu" *ngIf="!showRecommendedItems &&  !menuarrayEmpty">
+    <div class="col-md-12">
+      <h3>Today's Menu</h3>
+      <div class="col-xs-12 col-sm-6 col-md-3 items" *ngFor="let menu of menus | searchBy : searchText | orderBy: {property: column, direction: direction};let j=index ">
+        <div class="div-body hovereffect">
+          <div class="row image-row" style="float:top;">
+            <img src="{{menu.image_url}}" onerror="if (this.src != 'assets/no_image_available.jpg') this.src = 'assets/no_image_available.jpg';"
+              class="img-responsive thumbnail" style="width:244px ;height:160px" data-toggle="tooltip" title="{{menu.item_name}}">
+          </div>
+          <br>
+          <div class="row name-row">
+            <img class="img-icon" src="assets/veg_icon.png" *ngIf="menu.category_id == 'Cat1' " />
+            <img class="img-icon" src="assets/nonveg_icon.png" *ngIf="menu.category_id == 'Cat2' " /> &nbsp;{{menu.item_name}}
+            <br>
+            <span style="float:left;font-size:12px;color:gray">
+             {{menu.description}}
+            </span><br>
+            <span style="float:left">
+                     <i class="fa fa-inr" aria-hidden="true"></i> {{menu.amount_per_plate}}
+                  </span>
+            <button type="button" class="btn btn-danger" style="float:right;" data-backdrop="static" data-toggle="modal" [attr.data-target]="'#'+ j"
+              (click)="addToCart(menu)" [disabled]=isItemAdded(menu)>
+               <span class="text">{{isItemAdded(menu) ? 'Added' : 'Add to Cart'}} </span>
+                </button><br><br>
+            <a class="remove-text" (click)="removeItem(menu)">{{isItemAdded(menu) ? 'Remove from Cart' : ' '}} </a>
+            <div class="modal fade" id="{{j}}" role="dialog">
+              <div class="modal-dialog">
+                <!--Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Replace cart Item?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Your cart contains dishes from {{VendorInCart()}}. Do you want to discard the selection and add dishes
+                      from {{vendorOfItem(menu.vendor_id)}}?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="clearCartAndAdd(menu)">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br>
+            <hr>
+            <div class="col-md-12 col-sm-12 col-xs-12 rating">
+              <rating [(ngModel)]="menu.average_feedback" style="float:right;font-size:1.2rem" [readonly]="true" fullIcon="★" emptyIcon="☆"
+                [titles]="['Bad', 'Mediocre' , 'Good', 'Excellent', 'Awesome']"></rating>
+            </div>
+            <!--end of rating-->
+          </div>
+          <!--end of name-row-->
+        </div>
+        <!--end of div body-->
+      </div>
+      <!--end of items-->
+    </div>
+    <!--end of column-->
+  </div>
+  <!--end of todaysmenu-->
+
+
+  <div class="row recommendeditems" *ngIf="showRecommendedItems && !recommendedEmpty && (tempRecommendedItemsArray.length > 0)">
+    <div class="col-md-12">
+      <h3>Recommended Food Items</h3>
+      <div class="col-md-3 col-sm-6 col-xs-12 items" *ngFor="let menu of tempRecommendedItemsArray | searchBy : searchText | orderBy: {property: column, direction: direction} ; let j=index">
+        <div class="div-body hovereffect">
+          <div class="row image-row" style="float:top;">
+            <div class="vendor-name">
+              {{vendorOfItem(menu.vendor_id)}}
+            </div>
+            <br>
+            <img src="{{menu.image_url}}" onerror="if (this.src != 'assets/no_image_available.jpg') this.src = 'assets/no_image_available.jpg';"
+              class="img-responsive thumbnail" style="width:244px ;height:160px" data-toggle="tooltip" title="{{menu.item_name}}">
+          </div>
+          <br>
+          <div class="row name-row">
+            <img class="img-icon" src="assets/veg_icon.png" *ngIf="menu.category_id == 'Cat1' " />
+            <img class="img-icon" src="assets/nonveg_icon.png" *ngIf="menu.category_id == 'Cat2' " /> &nbsp;{{menu.item_name}}
+            <br>
+            <span style="float:left;font-size:12px;color:gray">
+             {{menu.description}}
+            </span><br>       
+            <span style="float:left">
+                     <i class="fa fa-inr" aria-hidden="true"></i> {{menu.amount_per_plate}}
+                  </span>
+
+            <button type="button" class="btn btn-danger" style="float:right;" data-backdrop="static" data-toggle="modal" [attr.data-target]="'#'+ j"
+              (click)="addToCart(menu)" [disabled]=isItemAdded(menu)>
+              <span class="text">{{isItemAdded(menu) ? 'Added' : 'Add to Cart'}} </span>
+            </button><br><br>
+            <a class="remove-text" (click)="removeItem(menu)">{{isItemAdded(menu) ? 'Remove from Cart' : ' '}} </a>
+            <div class="modal fade" id="{{j}}" role="dialog">
+              <div class="modal-dialog">
+                <!--Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Replace cart Item?</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>Your cart contains dishes from {{VendorInCart()}}. Do you want to discard the selection and add dishes
+                      from {{vendorOfItem(menu.vendor_id)}}?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="clearCartAndAdd(menu)">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+            <div class="col-md-12 col-sm-12 col-xs-12 rating">
+              <rating [(ngModel)]="menu.average_feedback" style="float:right;font-size:1.2rem;" [readonly]="true" fullIcon="★" emptyIcon="☆"
+                [titles]="['Bad', 'Mediocre' , 'Good', 'Excellent', 'Awesome']"></rating>
+            </div>
+            <!--end of rating-->
+          </div>
+          <!--end of name-row-->
+        </div>
+        <!--end of div body-->
+      </div>
+      <!--end of items-->
+    </div>
+    <!--end of column-->
+  </div>
+  <!--end of recommendeditems-->
+  <ng2-toasty [position]="'bottom-center'"></ng2-toasty>
+  <br><br><br>
+  <div class="row" *ngIf="!recommendedEmpty && !menuarrayEmpty && (tempRecommendedItemsArray.length>0)">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <a [routerLink]="['/navBar/cart']"> 
+            <button type="button" class="btn btn-danger" style="float:right;margin-right:100px;">Go to Cart</button>
+    </a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a>
+      <i class="fa fa-angle-up fa-5x angle-up" aria-hidden="true" (click)="onTop()"></i>
+    </a>
+    </div>
+  </div>
+
+  <div *ngIf="menuarrayEmpty">
+    <h3>There are no items present</h3>
+  </div>
+  <div *ngIf="recommendedEmpty">
+    <h3>There are no Recommended Items yet</h3>
+  </div>
+
+</div>
+<!--end of container-fluid-->

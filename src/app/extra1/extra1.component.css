@@ -1,0 +1,11 @@
+/* Styles */
+.container{
+  min-height: 520px;
+}
+#successdiv 
+{
+    font-family: "Quicksand";
+    font-size: 25px;
+    text-align:center;
+    margin-top: 50px;      
+}   

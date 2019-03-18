@@ -1,0 +1,53 @@
+/* Styles */
+.build-sec{
+  margin-top:10px;
+}
+ .location-names
+{  
+   cursor: pointer;
+  -moz-box-shadow: 0 0 10px #ccc;
+	-webkit-box-shadow: 0 0 10px #ccc;
+  box-shadow: 0 0 10px #ccc;
+  margin-top: 25px;
+  margin-left: -5px; 
+} 
+h4
+{
+  color: #ff4d4d;
+  font-family: "Quicksand";
+}
+h3{
+  font-family: "Quicksand";
+  font-weight: bold;
+}
+hr{
+  border-color: #ff4d4d;
+}
+.div-body{
+  margin-left: 20px;
+}
+.bottomright {
+    position: absolute;
+     bottom: -40px; 
+     font-size: 13px;  
+    color: black;
+    font-family: "Quicksand";
+}
+
+@media (max-width: xs) {
+    body{font-size: 3px;}
+}
+
+@media (max-width: sm) {
+    body{font-size: 5px;}
+}
+
+.address {
+    display: inline-block;
+    max-width: 250px;
+    padding: 10px;
+}
+
+
+
+

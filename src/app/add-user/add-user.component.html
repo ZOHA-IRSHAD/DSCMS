@@ -1,0 +1,90 @@
+<simple-notifications [options]="options"></simple-notifications>
+<!-- <div class="col-sm-9"> -->
+<div>
+        <b style="font-size:25px;margin-top:0px;">Add User</b>
+    </div>
+<h5 style="float:right;padding-right:5px;color:red;">* Required field</h5>
+<br>
+<form class="form-horizontal" style="padding-left: 0px;" [formGroup]="UserForm">
+
+  
+
+    <div class="form-group">
+        <label class="control-label col-xs-2" style="width:180px">First Name: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last Name">
+            <span class="help-block" *ngIf="!UserForm.get('lastname').valid && UserForm.get('lastname').touched">Please enter the Valid Vendor Name</span>
+
+        </div>
+    </div>
+        <div class="form-group">
+        <label class="control-label col-xs-2" style="width:180px">Last Name: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="FirstName" formControlName="firstname" placeholder="First Name">
+            <span class="help-block" *ngIf="!UserForm.get('firstname').valid && UserForm.get('firstname').touched">Please enter the Valid Vendor Name</span>
+
+        </div>
+    </div>
+
+    
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px"  for="inputEmail">Email ID: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email Address" pattern="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"
+                formControlName="email_id">
+            <span class="help-block" *ngIf="!UserForm.get('email_id').valid && UserForm.get('email_id').touched">Please enter the Valid email</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px"  for="phoneNumber">Phone Number: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="tel" class="form-control" id="phoneNumber" minlength="10" maxLength="10" placeholder="Phone Number" formControlName="contact_number">
+            <span class="help-block" *ngIf="!UserForm.get('contact_number').valid && UserForm.get('contact_number').touched">Please enter the valid Phone Number</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label  col-xs-2" style="width:180px"  for="phoneNumber">User Id: <b style="color:red;">*</b></label>
+        <div class="col-xs-10">
+            <input type="text" class="form-control" id="user_id" minlength="10" maxLength="10" placeholder="User ID" formControlName="user_id">
+            <span class="help-block" *ngIf="!UserForm.get('user_id').valid && UserForm.get('user_id').touched">Please enter the valid Phone Number</span>
+        </div>
+    </div>
+       <div class="form-group">
+            <label class="control-label col-xs-2"  style="width:180px" for="postalAddress">Address:<b style="color:red;">*</b></label>
+            <div class="col-xs-10">
+                <textarea rows="3" class="form-control" id="postalAddress" placeholder="Address" formControlName="address"  ></textarea>
+                <span class="help-block" *ngIf="!UserForm.get('address').valid && UserForm.get('address').touched" >please enter address</span>
+            </div>
+        </div>
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-9">
+            <button type="submit" class="btn btn-info btn-lg" style="background-color:#1DA1F2" data-toggle="modal" data-target="#myModal"
+                [disabled]="!UserForm.valid">Submit</button>
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Confirmation Window</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Please confirm if the Registration is done correctly.If not please press Cancel else Confirm
+                                button
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="background-color:#1DA1F2">Cancel</button>
+                            <button type="button" class="btn btn-default" (click)="Submit(UserForm)" style="background-color:#1DA1F2" data-dismiss="modal">Confirm</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button type="reset" class="btn btn-info btn-lg" value="Reset" (click)="this.UserForm.reset()" style="background-color:#1DA1F2">Reset</button>
+        </div>
+    </div>
+</form>
+<!-- </div> -->

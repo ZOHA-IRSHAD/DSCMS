@@ -1,0 +1,265 @@
+<div class="container-fluid" style="min-height:520px">
+<div class="row">
+  <div class="col-xs-12 col-md-6"> 
+   <div class="middle-section-breadcrumb">
+         <ol class="breadcrumb">
+            <li><a>My Orders</a></li>
+            <li class=active>Order History</li>
+        </ol>
+       </div><!--end of ms-breadcrumb-->
+  </div><!--end of col of row-->
+</div><!--end of row-->
+
+<div class="row row-pills">
+      <div class="col-xs-12">
+        <div class="middle-section">
+              <ul class="nav nav-pills nav-justified pillscls">
+                <li class="active"><a data-toggle="pill" href="#recent">Current</a></li>
+                <li><a data-toggle="pill" href="#history">History</a></li>
+              </ul>
+              <br>
+              <div class="tab-content">
+                    <div class="tab-pane active" id="recent">
+                          <div class="table-responsive" *ngIf=checkOrderRecent>
+                            <table class="table table-bordered table-striped">
+                              <thead>
+                                  <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th> 
+                                    <th>Amount (₹)</th>
+                                    <th>Status</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                   <tr *ngFor = "let recentOrder of detailsOfRecentOrders | paginate: { id:'page1', itemsPerPage: 10, currentPage: page1 } ">
+                                    <td>
+                                       <a data-toggle="modal" href= "#{{recentOrder.order_id}}">{{recentOrder.order_id}}</a> 
+                                      <div class="modal fade" id="{{recentOrder.order_id}}" role="dialog">
+                                        <div class="modal-dialog"> 
+                                            <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                      <h4 class="modal-title">Order Details</h4> 
+                                                    </div> 
+                                              <div class="modal-body">
+                                                <h5>
+                                                  <!-- <span> -->
+                                                    Order ID : {{recentOrder.order_id}}
+                                                  <!-- </span> -->
+                                                  <span style="float:right">
+                                                    Vendor : {{recentOrder.items[0].vendor_name}}
+                                                  </span>
+                                                </h5>
+                                                  <div class="table-responsive">
+                                                      <table class="table table-bordered table-striped">
+                                                          <thead>
+                                                            <tr>
+                                                              <th>Food Items</th>
+                                                              <th>Rate Per Plate (₹)</th>
+                                                              <th>Quantity</th>
+                                                              <th>Total Rates (₹)</th>
+                                                            </tr>
+                                                          </thead>
+                                                          <tbody>
+                                                            <tr *ngFor="let item of recentOrder.items">
+                                                              <td>{{item.item_name}}</td>
+                                                              <td>{{item.amount}}</td>
+                                                              <td>{{item.quantity}}</td>
+                                                              <td>{{item.amount*item.quantity}}</td>
+                                                            </tr>
+                                                          </tbody>
+                                                      </table>
+                                                  </div><!--end of table-responsive-->
+                                                  <h5  style="text-align:center">Total Amount : ₹ {{recentOrder.total_amount}}</h5> 
+                                                  <div class="modal-footer">
+                                                   <h5>Order Placed at : {{recentOrder.date}}&nbsp; {{recentOrder.transaction_time}}</h5>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                  </div><!-- end of modal-footer-->
+                                              </div>  <!--end of modal-body-->
+                                            </div><!--end of modal-content-->
+                                        </div><!--end of modal-dialog-->  
+                                      </div><!--end of modal fade-->   
+                                    </td>
+                                    <td>{{recentOrder.date}}&nbsp; {{recentOrder.transaction_time}}</td>
+                                    <td>{{recentOrder.total_amount}}</td>
+                                    <td>Pending</td>
+                                  </tr>
+                                </tbody> 
+                            </table>
+                              <pagination-controls (pageChange)="page1 = $event"
+                            id="page1"
+                            maxSize="10"
+                            autoHide="true"
+                            directionLinks="true">
+                      </pagination-controls>
+                            </div><!--end of table responsive--> 
+
+              <div class="row" *ngIf=!checkOrderRecent>
+               <p>There are no active orders.</p>
+              </div>
+                  </div><!--end of recent-->
+
+                  <div class="tab-pane" id="history">
+                    <div class="table-responsive"  *ngIf=checkOrderHistory>
+                      <table class="table table-bordered table-striped">
+                          <thead>
+                              <tr>
+                                <th>Order ID</th>
+                                <th>Order Date</th>
+                                <th>Amount (₹)</th>
+                                <th>Status</th>
+                                <th>Feedback</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor = "let historyOrder of detailsOfHistoryOrders | paginate: {id:'page', itemsPerPage: 10, currentPage: page }  ; let i=index">
+                                    <td>
+                                       <a data-toggle="modal" href="#{{historyOrder.order_id}}">{{historyOrder.order_id}}</a> 
+                                      <div class="modal fade" attr.id="{{historyOrder.order_id}}" role="dialog">
+                                        <div class="modal-dialog"> 
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>  
+                                                  <h4 class="modal-title">Order Details</h4> 
+                                                </div> 
+                                                <div class="modal-body">
+                                                  <h5>
+                                                      Order ID : {{historyOrder.order_id}}
+                                                  <span style="float:right">
+                                                    Vendor : {{historyOrder.items[0].vendor_name}}
+                                                  </span>
+                                                  </h5>
+                                                    <div class="table-responsive">
+                                                      <table class="table table-bordered table-striped">
+                                                            <thead>
+                                                              <tr>
+                                                                <th>Food Items</th>
+                                                                <th>Rate Per Plate (₹)</th>
+                                                                <th>Quantity</th>
+                                                                <th>Total Rates (₹)</th>
+                                                              </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                              <tr *ngFor="let item of historyOrder.items">
+                                                                <td>{{item.item_name}}</td>
+                                                                <td>{{item.amount}}</td>
+                                                                <td>{{item.quantity}}</td>
+                                                                <td>{{item.amount*item.quantity}}</td>
+                                                              </tr>
+                                                            </tbody>
+                                                      </table>
+                                                        <h5 style="text-align:center">Total Amount : ₹ {{historyOrder.total_amount}}</h5> 
+                                                    </div><!--end of table-responsive-->
+                                                    <div class="modal-footer">
+                                                          <h5>Order Placed at : {{historyOrder.date}}&nbsp; {{historyOrder.transaction_time}}</h5>
+                                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
+                                                    </div><!-- end of modal-footer-->
+                                                </div>  <!--end of modal-body-->
+                                            </div><!--end of modal-content-->
+                                        </div><!--end of modal-dialog-->  
+                                      </div><!--end of modal fade-->   
+                                    </td> 
+                                    <td> {{historyOrder.date}}&nbsp; {{historyOrder.transaction_time}}</td>
+                                    <td>{{historyOrder.total_amount}}</td>
+                                    <td>{{historyOrder.order_status}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" data-backdrop="static" data-toggle="modal" [attr.data-target]="'#'+ i" (click)="getVendorArray(historyOrder.items)" [disabled]=isFeedbackGiven(historyOrder.order_id)>
+                                            <span class="text">{{isFeedbackGiven(historyOrder.order_id) ? 'Feedback given' : 'Give Feedback'}} </span>                    
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="{{i}}" role="dialog">
+                                          <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                              <form #f>
+                                                <div class="modal-header">
+                                                      <button type="reset" class="close" data-dismiss="modal" (click)="f.reset();clearData()">&times;</button>  
+                                                  <h4 class="modal-title" style="text-align:center" >Feedback</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                  <h4>Order Id : {{historyOrder.order_id}}</h4>
+                                                  <h4 style="text-align : left">Quality Of Service <span style="font-size:13px">(5 being best and 1 being poor)</span></h4>
+                                                  
+                                                  <div class="table-responsive">
+                                                    
+                                                      <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                          <tr>
+                                                            <th>Vendor</th>
+                                                            <th>Ratings</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr *ngFor="let vendor of vendorsArray">
+                                                            <td>{{vendor}}</td>
+                                                            <td>
+                                                               <fieldset class ="rating">
+                                                                <input type= "radio" title="Awesome" name="{{vendor}}ratingOfVendor" value="5" (click)="setVendorRating(vendor,5)">5
+                                                                <input type= "radio" title="Good" name="{{vendor}}ratingOfVendor" value="4" (click)="setVendorRating(vendor,4)">4
+                                                                <input type= "radio" title="Average" name="{{vendor}}ratingOfVendor" value="3" (click)="setVendorRating(vendor,3)">3
+                                                                <input type= "radio" title="Bad" name="{{vendor}}ratingOfVendor" value="2" (click)="setVendorRating(vendor,2)">2
+                                                                <input type= "radio" title="Poor" name="{{vendor}}ratingOfVendor" value="1" (click)="setVendorRating(vendor,1)">1
+                                                              </fieldset> 
+                                                            </td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                  </div>
+                                                  <h4 style="text-align : left">Quality Of Food <span style="font-size:13px">(5 being best and 1 being poor)</span></h4>
+                                                      <div class="table-responsive">
+                                                                <table class="table table-bordered table-striped">
+                                                                      <thead>
+                                                                        <tr>
+                                                                          <th>Item</th>
+                                                                          <th style="width: 30%">Ratings</th>
+                                                                          <th>Remarks</th>
+                                                                        </tr>
+                                                                      </thead>
+                                                                      <tbody>
+                                                                        <tr *ngFor="let item of historyOrder.items; let i=index">
+                                                                          <td>{{item.item_name}}</td>
+                                                                          <td>
+                                                                             <fieldset class ="rating">
+                                                                              <input type= "radio" title="Loved it" id="star5" name="{{item.item_name}}{{item.vendor_id}}ratingOfItem" value="5" (click)="setItemRating(item.vendor_id,item.vendor_name,item.item_id,item.item_name,item.category_id,item.serving_id,5,i)">5
+                                                                              <input type= "radio" title="Liked it" id="star4" name="{{item.item_name}}{{item.vendor_id}}ratingOfItem" value="4" (click)="setItemRating(item.vendor_id,item.vendor_name,item.item_id,item.item_name,item.category_id,item.serving_id,4,i)">4
+                                                                              <input type= "radio" title="Average" id="star3" name="{{item.item_name}}{{item.vendor_id}}ratingOfItem" value="3" (click)="setItemRating(item.vendor_id,item.vendor_name,item.item_id,item.item_name,item.category_id,item.serving_id,3,i)">3
+                                                                              <input type= "radio" title="Disliked it" id="star2" name="{{item.item_name}}{{item.vendor_id}}ratingOfItem" value="2" (click)="setItemRating(item.vendor_id,item.vendor_name,item.item_id,item.item_name,item.category_id,item.serving_id,2,i)">2
+                                                                              <input type= "radio" title="Very bad" id="star1" name="{{item.item_name}}{{item.vendor_id}}ratingOfItem" value="1" (click)="setItemRating(item.vendor_id,item.vendor_name,item.item_id,item.item_name,item.category_id,item.serving_id,1,i)">1
+                                                                            </fieldset> 
+                                                                          </td>
+                                                                          <td>
+                                                                            <input class="form-control" type="text" name="{{i}}" [(ngModel)] ="remarksTextValue[i]" [maxlength]="100" (click)="remarks(i)" />
+                                                                          </td>
+                                                                        </tr>
+                                                                      </tbody>
+                                                                </table>
+                                                      </div><!--end of table-responsive-->
+                                                      <div class="row"  style="text-align:center">
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"  [disabled]= "feedbackButtonactive" (click)="submitFeedback(historyOrder.order_id,historyOrder.user_id)">Submit Feedback</button>
+                                                      </div>
+                                                </div><br><br>
+                                              </form>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </td>
+                              </tr>
+                          </tbody>    
+                      </table>
+                      <pagination-controls (pageChange)="page = $event"
+                            id="page"
+                            maxSize="10"
+                            autoHide="true"
+                            directionLinks="true">
+                      </pagination-controls>
+                    </div><!--end of table-responsive-->
+
+                    <div class="row" *ngIf=!checkOrderHistory>
+                      <p>There are no orders yet.</p>
+                    </div>
+                  </div><!--end of history-->
+                 </div><!--end of tab-content-->
+        </div><!--end of middle-section-->
+      </div><!--end of col of row2-->     
+ </div><!--end of row-pills-->
+</div><!--end of container-fluid-->

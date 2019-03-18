@@ -1,0 +1,11 @@
+<!-- <select (change)="selectChangeHandler($event,i)">
+                             
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
+                            </select>  -->
+                          <!-- <select class="form-control" [(ngModel)] = 'selectQuan' #t (change)="callType(t.value)">
+                             <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                          </select>
+                         -->

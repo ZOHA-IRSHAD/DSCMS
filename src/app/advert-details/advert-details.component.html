@@ -1,0 +1,140 @@
+<div class="row">
+
+   
+        <label style="font-size:25px;" style="color:black"><h3><b>Advertisement details</b></h3></label>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab"(click)="Refresh()" href="#Live" style="font-size:15px;">Active Advertisements</a></li>
+            <li><a data-toggle="tab"  href="#expired" (click)="Refresh()" style="font-size:15px;">InActive Advertisements</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="Live" class="tab-pane fade in active">
+                <div style="margin-bottom:10px;">
+
+                    <div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+                        <input class="form-control" placeholder="Search by Advertisement Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchLiveAdsText">
+                    </div>
+
+                    <table style="margin-top:50px;" class="table table-bordered">
+                        <thead style="background-color:#0288D1">
+                            <tr>
+                                <th>Actions</th>
+                                <th>Advertisement ID</th>
+                                <th>Advertisement Name</th>
+                                <th>Contact Person</th>
+                                <th>Contact Email</th>
+                                <th>Contact Phone</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Advertisement Image</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody *ngIf='arrAdvertLive===0'>
+                            <tr>
+                                <p>No Data Available</p>
+                            </tr>
+                        </tbody>
+                        <tbody *ngFor='let data of arrAdvertLive | AdsName:searchLiveAdsText | paginate: { itemsPerPage: 5, currentPage: p ,id:"p"} '>
+                            <!-- |paginate: { itemsPerPage: 5, currentPage: p }'  -->
+                            <tr><td style="text-align:center">
+                  <a data-toggle="modal" href="#{{data._id}}"><i class="fa fa-trash fa-2x" aria-hidden="true" style="color:#1DA1F2"></i></a>
+                  <div class="modal fade" attr.id="{{data._id}}" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Alert</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p style="color:black"> Would you like to delete the Advertisement <b><i style="color:black">"{{data.ad_name}}"</i></b>from the table? If Yes Click on Confirm else Close the window.
+                          </p>
+                           <div class="modal-footer">
+                            <!-- <button type="button" class="btn btn-default" (click)="Delete(data.location_id)" data-dismiss="modal">Confirm</button> -->
+                            <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" data-dismiss="modal" >Close</button>
+                                                    <!-- <button type="button"  style="background-color:#FF4D4D" data-dismiss="modal">Close</button> -->
+                            <button type="button" class="btn btn-default" style="background-color:#1DA1F2;color:white" (click)="Delete(data._id)" data-dismiss="modal">Confirm</button>
+                          </div>                           <!-- end of modal-footer-->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                                <td>{{data._id}}</td>
+                                <td>{{data.ad_name}}</td>
+                                <td>{{data.contact_employee}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.phone}}</td>
+                                <td>{{data.ad_start_date}}</td>
+                                <td>{{data.ad_end_date}}</td>
+                                <td><img src="{{data.image_url}}"  style="width:150px; height:100px" /></td>
+                                <td>{{data.status}}</td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <pagination-controls (pageChange)="p = $event" id="p" autoHide="true" directionLinks="true">
+                    </pagination-controls>
+
+                </div>
+
+            </div>
+
+            <div id="expired" class="tab-pane fade">
+                <div style="margin-bottom:10px;">
+                    <div style="margin-bottom:20px;margin-top:20px;padding-left:0px;" class="col-md-6 searchitem">
+                        <input class="form-control" placeholder="Search by Advertisement Name" name="srch-term" id="srch-term" type="text" [(ngModel)]="searchExAdText">
+                    </div>
+                    <table style="margin-top:50px;" class="table table-bordered">
+                        <thead style="background-color:#0288D1">
+                            <tr>
+
+                                <th>Advertisement ID</th>
+                                <th>Advertisement Name</th>
+                                <th>Contact Person</th>
+                                <th>Contact Email</th>
+                                <th>Contact Phone</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Advertisement Image</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody *ngIf='arrAdvertExpired===0'>
+                            <tr>
+                                <p>No Data Available</p>
+                            </tr>
+                        </tbody>
+                        <tbody *ngFor='let data of arrAdvertExpired | AdvertName:searchExAdText  |  paginate: { itemsPerPage: 5, currentPage: r ,id:"r"} '>
+
+                            <tr>
+
+
+                                <td>{{data._id}}</td>
+                                <td>{{data.ad_name}}</td>
+                                <td>{{data.contact_employee}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.phone}}</td>
+                                <td>{{data.ad_start_date}}</td>
+                                <td>{{data.ad_end_date}}</td>
+                                <td><img src="{{data.image_url}}"  style="width:150px; height:100px" /></td>
+                                <td>{{data.status}}</td>
+
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <pagination-controls (pageChange)="r = $event" id="r" autoHide="true" directionLinks="true">
+                    </pagination-controls>
+
+                </div>
+            </div>
+        </div>
+   
+</div>
